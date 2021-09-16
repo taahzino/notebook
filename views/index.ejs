@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - Notebook</title>
+
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+</head>
+<body class="">
+    <div class="container">
+        <div class="sidebar">
+            <div class="sidebar_header">
+                <a  class="item__link">
+                    <i class='bx bx-book-reader item__icon'></i>
+                    <span class="item__name">Notebook</span>
+                </a>
+            </div>
+            <div class="sidebar__menu">
+                <a href="#" class="item__link active">
+                    <i class='bx bx-home item__icon'></i>
+                    <span class="item__name">Home</span>
+                </a>
+                <a href="#" class="item__link createNoteLink">
+                    <i class='bx bx-plus-circle item__icon' ></i>
+                    <span class="item__name">Create</span>
+                </a>
+                <a href="#" class="item__link">
+                    <i class='bx bx-heart-circle item__icon' ></i>
+                    <span class="item__name">Favourites</span>
+                </a>
+                <a href="#" class="item__link">
+                    <i class='bx bx-category item__icon' ></i>
+                    <span class="item__name">Categories</span>
+                </a>
+                <a href="#" class="item__link">
+                    <i class='bx bx-user item__icon' ></i>
+                    <span class="item__name">Profile</span>
+                </a>
+            </div>
+            <div class="footer">
+                <a href="#" class="item__link">
+                    <i class='bx bx-log-out item__icon' ></i>
+                    <span class="item__name">Logout</span>
+                </a>
+            </div>
+        </div>
+        <div class="content">
+            <form action="#" class="searchBox">
+                <input type="text" placeholder="Search...">
+                <button type="submit" class="bx bx-search"></button>
+                <select name="search_filter" id="search_filter" class="search_filter">
+                    <option value="filter" disabled selected>Filter</option>
+                    <option value="today">Today</option>
+                    <option value="this_week">This Week</option>
+                    <option value="this_month">This Month</option>
+                    <option value="this_year">This Year</option>
+                </select>
+            </form>
+
+            <h2 class="page__title">Home</h2>
+            <p class="note__section_title pinned__title">Pinned</p>
+            <div class="notes__grid pinned__notes">
+                <div class="note">
+                    <h3 class="note__title">Lorem, ipsum dolor.</h3>
+                    <div name="note__summery" class="note__summery">
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla iste similique modi eligendi accusamus voluptates explicabo dolore et fugiat magni....
+                    </div>
+
+                    <div class="note__options">
+                        <button class="note__option_pin">
+                            <i class='bx bx-pin' ></i>
+                        </button>
+                        <button class="note__option_heart">
+                            <i class='bx bx-heart-circle' ></i>
+                        </button>
+                        <button class="note__option_add_colaborator">
+                            <i class='bx bx-user-plus' ></i>
+                        </button>
+                        <button class="note__option_share">
+                            <i class='bx bx-share-alt' ></i>
+                        </button>
+                        <button class="note__option_delete">
+                            <i class='bx bx-trash' ></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <p class="note__section_title other__title">Others</p>
+            <div class="notes__grid">
+                <div class="note">
+                    <h3 class="note__title">Lorem, ipsum dolor.</h3>
+                    <div name="note__summery" class="note__summery">
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla iste similique modi eligendi accusamus voluptates explicabo dolore et fugiat magni....
+                    </div>
+
+                    <div class="note__options">
+                        <button class="note__option_pin">
+                            <i class='bx bx-pin' ></i>
+                        </button>
+                        <button class="note__option_heart">
+                            <i class='bx bx-heart-circle' ></i>
+                        </button>
+                        <button class="note__option_add_colaborator">
+                            <i class='bx bx-user-plus' ></i>
+                        </button>
+                        <button class="note__option_share">
+                            <i class='bx bx-share-alt' ></i>
+                        </button>
+                        <button class="note__option_delete">
+                            <i class='bx bx-trash' ></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="note">
+                    <h3 class="note__title">Lorem, ipsum dolor.</h3>
+                    <div name="note__summery" class="note__summery">
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla iste similique modi eligendi accusamus voluptates explicabo dolore et fugiat magni....
+                    </div>
+
+                    <div class="note__options">
+                        <button class="note__option_pin">
+                            <i class='bx bx-pin' ></i>
+                        </button>
+                        <button class="note__option_heart">
+                            <i class='bx bx-heart-circle' ></i>
+                        </button>
+                        <button class="note__option_add_colaborator">
+                            <i class='bx bx-user-plus' ></i>
+                        </button>
+                        <button class="note__option_share">
+                            <i class='bx bx-share-alt' ></i>
+                        </button>
+                        <button class="note__option_delete">
+                            <i class='bx bx-trash' ></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="note">
+                    <h3 class="note__title">Lorem, ipsum dolor.</h3>
+                    <div name="note__summery" class="note__summery">
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla iste similique modi eligendi accusamus voluptates explicabo dolore et fugiat magni....
+                    </div>
+
+                    <div class="note__options">
+                        <button class="note__option_pin">
+                            <i class='bx bx-pin' ></i>
+                        </button>
+                        <button class="note__option_heart">
+                            <i class='bx bx-heart-circle' ></i>
+                        </button>
+                        <button class="note__option_add_colaborator">
+                            <i class='bx bx-user-plus' ></i>
+                        </button>
+                        <button class="note__option_share">
+                            <i class='bx bx-share-alt' ></i>
+                        </button>
+                        <button class="note__option_delete">
+                            <i class='bx bx-trash' ></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="note">
+                    <h3 class="note__title">Lorem, ipsum dolor.</h3>
+                    <div name="note__summery" class="note__summery">
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla iste similique modi eligendi accusamus voluptates explicabo dolore et fugiat magni....
+                    </div>
+
+                    <div class="note__options">
+                        <button class="note__option_pin">
+                            <i class='bx bx-pin' ></i>
+                        </button>
+                        <button class="note__option_heart">
+                            <i class='bx bx-heart-circle' ></i>
+                        </button>
+                        <button class="note__option_add_colaborator">
+                            <i class='bx bx-user-plus' ></i>
+                        </button>
+                        <button class="note__option_share">
+                            <i class='bx bx-share-alt' ></i>
+                        </button>
+                        <button class="note__option_delete">
+                            <i class='bx bx-trash' ></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="note">
+                    <h3 class="note__title">Lorem, ipsum dolor.</h3>
+                    <div name="note__summery" class="note__summery">
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla iste similique modi eligendi accusamus voluptates explicabo dolore et fugiat magni....
+                    </div>
+
+                    <div class="note__options">
+                        <button class="note__option_pin">
+                            <i class='bx bx-pin' ></i>
+                        </button>
+                        <button class="note__option_heart">
+                            <i class='bx bx-heart-circle' ></i>
+                        </button>
+                        <button class="note__option_add_colaborator">
+                            <i class='bx bx-user-plus' ></i>
+                        </button>
+                        <button class="note__option_share">
+                            <i class='bx bx-share-alt' ></i>
+                        </button>
+                        <button class="note__option_delete">
+                            <i class='bx bx-trash' ></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="note">
+                    <h3 class="note__title">Lorem, ipsum dolor.</h3>
+                    <div name="note__summery" class="note__summery">
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla iste similique modi eligendi accusamus voluptates explicabo dolore et fugiat magni....
+                    </div>
+
+                    <div class="note__options">
+                        <button class="note__option_pin">
+                            <i class='bx bx-pin' ></i>
+                        </button>
+                        <button class="note__option_heart">
+                            <i class='bx bx-heart-circle' ></i>
+                        </button>
+                        <button class="note__option_add_colaborator">
+                            <i class='bx bx-user-plus' ></i>
+                        </button>
+                        <button class="note__option_share">
+                            <i class='bx bx-share-alt' ></i>
+                        </button>
+                        <button class="note__option_delete">
+                            <i class='bx bx-trash' ></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="note">
+                    <h3 class="note__title">Lorem, ipsum dolor.</h3>
+                    <div name="note__summery" class="note__summery">
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla iste similique modi eligendi accusamus voluptates explicabo dolore et fugiat magni....
+                    </div>
+
+                    <div class="note__options">
+                        <button class="note__option_pin">
+                            <i class='bx bx-pin' ></i>
+                        </button>
+                        <button class="note__option_heart">
+                            <i class='bx bx-heart-circle' ></i>
+                        </button>
+                        <button class="note__option_add_colaborator">
+                            <i class='bx bx-user-plus' ></i>
+                        </button>
+                        <button class="note__option_share">
+                            <i class='bx bx-share-alt' ></i>
+                        </button>
+                        <button class="note__option_delete">
+                            <i class='bx bx-trash' ></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="note">
+                    <h3 class="note__title">Lorem, ipsum dolor.</h3>
+                    <div name="note__summery" class="note__summery">
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla iste similique modi eligendi accusamus voluptates explicabo dolore et fugiat magni....
+                    </div>
+
+                    <div class="note__options">
+                        <button class="note__option_pin">
+                            <i class='bx bx-pin' ></i>
+                        </button>
+                        <button class="note__option_heart">
+                            <i class='bx bx-heart-circle' ></i>
+                        </button>
+                        <button class="note__option_add_colaborator">
+                            <i class='bx bx-user-plus' ></i>
+                        </button>
+                        <button class="note__option_share">
+                            <i class='bx bx-share-alt' ></i>
+                        </button>
+                        <button class="note__option_delete">
+                            <i class='bx bx-trash' ></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="new_note popup">
+        <input type="text" name="" id="" placeholder="Title">
+        <textarea id="" placeholder="Take a note..."></textarea>
+
+        <div class="note__options">
+            <button class="note__option_pin">
+                <i class='bx bx-pin' ></i>
+            </button>
+            <button class="note__option_heart">
+                <i class='bx bx-heart-circle' ></i>
+            </button>
+            <button class="note__option_add_colaborator">
+                <i class='bx bx-user-plus' ></i>
+            </button>
+            <button class="note__option_share">
+                <i class='bx bx-share-alt' ></i>
+            </button>
+            <button class="note__option_delete">
+                <i class='bx bx-trash' ></i>
+            </button>
+            <button class="note__option_close">
+                <i class='bx bx-x'></i>
+            </button>
+        </div>
+    </div>
+
+    <script src="/assets/js/popup.js"></script>
+</body>
+</html>

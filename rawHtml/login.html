@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Login - Notebook </title>
+    <link rel="shortcut icon" href="assets/images/logo.jpg">
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="assets/css/login.css">
+
+    <!-- Font Awesome CDN  -->
+    <!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css" integrity="sha384-vSIIfh2YWi9wW0r9iZe7RJPrKwp6bG+s9QZMoITbCckVJqGCCRhc+ccxNcdpHuYu" crossorigin="anonymous"> -->
+</head>
+<body>
+    
+    <div class="container">
+        <a href="" class="google_login">
+            <img src="https://img.icons8.com/color/48/000000/google-logo.png"/>
+            <span>Log in with Google</span>
+        </a>
+        Or
+        <form action="#" class="login__form" id="login__form">
+            <div class="input_group">
+                <label for="email">Email</label>
+                <input type="email" name="email" id="email" placeholder="Enter your email">
+                <p class="error_msg"></p>
+            </div>
+            <div class="input_group">
+                <label for="password">Password</label>
+                <input type="password" name="password" id="password" placeholder="Enter your password">
+                <p class="error_msg"></p>
+            </div>
+            <div class="input_group forget_pass">
+                <a href="" class="">Forget Password?</a>
+            </div>
+            <div class="input_group">
+                <button type="submit" class="submit" id="submit">Log in</button>
+            </div>
+            <div class="input_group">
+                <p class="signup">
+                    Don't have an account? <a href="">Sign up</a>
+                </p>
+            </div>
+        </form>
+
+    </div>
+
+    <!-- Scripts -->
+    <script src="./assets/js/loginValidation.js"></script>
+</body>
+</html>

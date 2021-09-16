@@ -1,0 +1,325 @@
+@import url("./fonts/google.css");
+* {
+  padding: 0;
+  margin: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+a {
+  text-decoration: none;
+}
+
+button {
+  cursor: pointer;
+}
+
+body {
+  background-color: #10182F;
+  width: 100%;
+  height: 100vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  font-family: Poppins, serif;
+  font-size: 14px;
+}
+
+body.inactive .container {
+  overflow: hidden;
+  -webkit-filter: blur(1px);
+          filter: blur(1px);
+  pointer-events: none;
+}
+
+.container {
+  position: fixed;
+  width: 100%;
+  max-width: 1200px;
+  min-height: 600px;
+  border-radius: 10px;
+  background-color: #fff;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.sidebar {
+  border-right: 1px solid #eee;
+  max-width: 100px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  border-radius: 5px 0 0 5px;
+}
+
+.sidebar .sidebar__menu {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.sidebar .item__link {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  text-align: center;
+  margin: 10px;
+  padding: 15px 5px;
+  color: #333;
+  border-radius: 5px;
+  -webkit-transition: 0.3s ease;
+  transition: 0.3s ease;
+}
+
+.sidebar .item__link i {
+  font-size: 18px;
+}
+
+.sidebar .item__link span {
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.sidebar .item__link:hover, .sidebar .item__link.active {
+  background-color: #0C5DF4;
+  color: #fff;
+}
+
+.sidebar .sidebar_header .item__link {
+  cursor: default;
+}
+
+.sidebar .sidebar_header .item__link:hover, .sidebar .sidebar_header .item__link.active {
+  background-color: transparent;
+  color: #333;
+}
+
+.content {
+  position: relative;
+  width: 100%;
+  background-color: whitesmoke;
+  border-radius: 0 10px 10px 0;
+  padding: 10px;
+  max-height: 600px;
+  overflow: hidden;
+  overflow-y: scroll;
+}
+
+.content .searchBox {
+  position: relative;
+  height: 40px;
+  max-width: 350px;
+  width: 100%;
+}
+
+.content .searchBox input {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  font-size: 16px;
+  padding: 0 35px;
+  border: none;
+  outline: none;
+  border-radius: 10px;
+}
+
+.content .searchBox input::-webkit-input-placeholder {
+  color: #ccc;
+}
+
+.content .searchBox input:-ms-input-placeholder {
+  color: #ccc;
+}
+
+.content .searchBox input::-ms-input-placeholder {
+  color: #ccc;
+}
+
+.content .searchBox input::placeholder {
+  color: #ccc;
+}
+
+.content .searchBox input:focus {
+  border: 2px solid lightskyblue;
+}
+
+.content .searchBox button {
+  position: absolute;
+  top: 11px;
+  left: 10px;
+  font-size: 18px;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  color: #ccc;
+}
+
+.content .searchBox select {
+  position: absolute;
+  right: 0;
+  top: 10px;
+  background-color: #fff;
+  border: none;
+  outline: none;
+  font-size: 16px;
+  max-width: 70px;
+  font-weight: 500;
+  margin-right: 10px;
+}
+
+.content .searchBox select option {
+  background-color: #fff;
+}
+
+.content .page__title {
+  margin-top: 10px;
+  margin-bottom: 5px;
+}
+
+::-webkit-scrollbar {
+  border-radius: 0 10px 10px 0;
+}
+
+.note__section_title {
+  margin: 5px;
+  font-weight: 500;
+}
+
+.notes__grid {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (minmax(250px, 300px))[auto-fit];
+      grid-template-columns: repeat(auto-fit, minmax(250px, 300px));
+  grid-gap: 10px;
+  max-height: 400px;
+}
+
+.notes__grid .note {
+  background-color: #fff;
+  padding: 10px;
+  border-radius: 10px;
+  border: 2px solid transparent;
+}
+
+.notes__grid .note:hover {
+  border: 2px solid #eee;
+  cursor: default;
+}
+
+.notes__grid .note:hover .note__options {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.note__options {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  margin-top: 10px;
+  opacity: 0;
+  pointer-events: none;
+  -webkit-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+}
+
+.note__options button {
+  background-color: transparent;
+  outline: none;
+  font-size: 18px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  border: 2px solid transparent;
+  background-color: transparent;
+  border-radius: 50%;
+  padding: 3px;
+  -webkit-transition: all 0.2s ease;
+  transition: all 0.2s ease;
+}
+
+.note__options button:hover {
+  border: 2px solid #eee;
+  background-color: #eee;
+}
+
+.popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  background-color: #fff;
+  width: 50%;
+  max-width: 550px;
+  padding: 10px;
+  border-radius: 10px;
+  border: 2px solid dodgerblue;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.popup.active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.popup .note__options {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.popup input, .popup textarea {
+  border: none;
+  outline: none;
+  font-size: 18px;
+  padding: 10px;
+  margin-bottom: 3px;
+  font-family: Poppins, serif;
+  font-weight: 500;
+}
+
+.popup textarea {
+  font-size: 16px;
+  resize: none;
+  font-weight: 400;
+  height: 150px;
+  max-height: 250px;
+}

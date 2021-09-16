@@ -1,0 +1,39 @@
+{
+  "name": "notebook_app",
+  "version": "1.0.0",
+  "description": "A node application",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app",
+    "dev": "node dev && nodemon app"
+  },
+  "author": "Tahsin Ahmed Tushar <tushariar@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "eslint": "7.2.0",
+    "eslint-config-airbnb-base": "14.2.1",
+    "eslint-config-prettier": "^8.1.0",
+    "eslint-plugin-import": "2.22.1",
+    "eslint-plugin-prettier": "^3.3.1",
+    "prettier": "^2.2.1"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "connect-flash": "^0.1.1",
+    "cookie-parser": "^1.4.5",
+    "dotenv": "^10.0.0",
+    "ejs": "^3.1.6",
+    "express": "^4.17.1",
+    "express-ejs-layouts": "^2.5.1",
+    "express-session": "^1.17.2",
+    "express-validator": "^6.12.1",
+    "http-errors": "^1.8.0",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.0.5",
+    "open": "^8.2.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tushariar/notebook.git"
+  }
+}
