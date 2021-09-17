@@ -10,9 +10,21 @@ const {
 
 form.addEventListener('submit', (event) => {
     event.preventDefault();
-
+    removeErrors();
     checkInputs();
 });
+
+// remove previous errors
+const removeErrors = () => {
+    const errorMsgs = document.querySelectorAll('.error_msg');
+    const errors = document.querySelectorAll('.error');
+    errorMsgs.forEach((em) => {
+        em.innerText = '';
+    });
+    errors.forEach((e) => {
+        e.classList.remove('error');
+    });
+};
 
 const checkInputs = () => {
     // get all the values and trim them
@@ -108,6 +120,30 @@ function isEmail(email) {
 	return /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email);
 }
 
-const sendRequest = (userobject) => {
-    console.log(userobject);
+const sendRequest = async (userobject) => {
+    const res = await fetch(`${window.location.origin}/api/signup/`, {
+        method: 'POST',
+        cache: 'no-cache',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(userobject),
+    });
+    const response = await res.json();
+
+    if (response.errors) {
+        const errorKeys = Object.keys(response.errors);
+        if (errorKeys.length !== 0) {
+            errorKeys.forEach((ek) => {
+                showError(form[ek], response.errors[ek].msg);
+            });
+        }
+    }
+
+    if (res.status === 200 && !response.errors) {
+        document.querySelector('.successMsg').classList.add('show');
+        setTimeout(() => {
+            window.location.href = `${window.location.origin}/`;
+        }, 1500);
+    }
 };

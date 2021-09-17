@@ -5,6 +5,7 @@ const express = require('express');
 const decorateHTML = require('../../middlewares/common/decorateHTML');
 const checkLogin = require('../../middlewares/auth/checkLogin');
 const isLoggedIn = require('../../middlewares/auth/isLoggedIn');
+const { doLogout } = require('../../controllers/loginControllers');
 
 // Create express router
 const appRouter = express.Router();
@@ -19,6 +20,7 @@ appRouter.get('/login', decorateHTML, isLoggedIn, (req, res) => {
 appRouter.get('/signup', decorateHTML, isLoggedIn, (req, res) => {
     res.render('signup');
 });
+appRouter.get('/logout', decorateHTML, doLogout);
 
 // Export the router object
 module.exports = appRouter;

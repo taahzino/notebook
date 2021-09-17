@@ -2,8 +2,12 @@
 const mongoose = require('mongoose');
 
 // Create a schema
-const UserSchema = new mongoose.Schema(
+const GoogleUserSchema = new mongoose.Schema(
     {
+        googleId: {
+            type: String,
+            required: true,
+        },
         firstname: {
             type: String,
             required: true,
@@ -16,24 +20,20 @@ const UserSchema = new mongoose.Schema(
             type: String,
             required: true,
         },
-        password: {
-            type: String,
-            required: true,
-        },
         photo: {
             type: String,
             default: '',
         },
         userType: {
             type: String,
-            default: 'generalUser',
+            default: 'googleUser',
         },
     },
     { timestamps: true }
 );
 
 // Create a model
-const UserModel = mongoose.model('people', UserSchema);
+const GoogleUserModel = mongoose.model('googleUser', GoogleUserSchema);
 
 // Export the model
-module.exports = UserModel;
+module.exports = GoogleUserModel;

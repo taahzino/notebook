@@ -20,6 +20,24 @@ const doLogin = async (req, res) => {
     });
 };
 
+// logout
+const doLogout = async (req, res) => {
+    if (req.isAuthenticated()) {
+        req.logout();
+    } else {
+        res.clearCookie(process.env.APP_NAME);
+    }
+
+    if (res.locals.HTML) {
+        res.redirect('/login');
+    } else {
+        res.status(200).json({
+            message: 'Logged out successfully!',
+        });
+    }
+};
+
 module.exports = {
     doLogin,
+    doLogout,
 };
