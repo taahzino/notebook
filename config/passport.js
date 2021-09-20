@@ -22,7 +22,7 @@ const config = (passport) => {
 
                 try {
                     // check if the user already exists
-                    const user = GoogleUser.findOne({ googleId: profile.id });
+                    const user = await GoogleUser.findOne({ googleId: profile.id });
 
                     if (user && typeof user === 'object' && user.googleId === profile.id) {
                         callback(null, user);
