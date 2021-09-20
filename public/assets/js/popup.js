@@ -31,7 +31,8 @@ body.onclick = (e) => {
     popup.classList.contains("active") &&
     e.target !== createNoteLink &&
     e.target !== createNoteLinkIcon &&
-    e.target !== createNoteLinkSpan
+    e.target !== createNoteLinkSpan &&
+    e.target.closest('.popup') !== popup
   ) {
     e.preventDefault();
     body.classList.remove("inactive");
