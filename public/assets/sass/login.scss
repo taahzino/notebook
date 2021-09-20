@@ -187,3 +187,22 @@ label[for="name"] {
   font-weight: 500;
   font-size: 17px;
 }
+
+@media screen and (max-width: 500px) {
+  .container {
+    max-width: 100%;
+    height: 100vh;
+  }
+}
+
+@media screen and (max-width: 300px) {
+  .google_login {
+    flex-direction: column;
+    width: 90%;
+  }
+
+  .login__form,
+  .signup__form {
+    width: 90%;
+  }
+}
