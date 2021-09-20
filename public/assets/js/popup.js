@@ -10,7 +10,7 @@ const controlTextarea = () => {
   const clientHeight = textarea.clientHeight;
   const scrollHeight = textarea.scrollHeight;
 
-  if (scrollHeight < 250) {
+  if (scrollHeight < 350) {
     textarea.style.height = `${scrollHeight}px`;
   }
 };

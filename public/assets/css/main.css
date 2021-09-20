@@ -15,7 +15,8 @@ button {
 }
 
 body {
-  background-color: #10182F;
+  position: relative;
+  background-color: #10182f;
   width: 100%;
   height: 100vh;
   display: -webkit-box;
@@ -33,17 +34,13 @@ body {
 
 body.inactive .container {
   overflow: hidden;
-  -webkit-filter: blur(1px);
-          filter: blur(1px);
+  opacity: 0.5;
   pointer-events: none;
 }
 
 .container {
-  position: fixed;
   width: 100%;
-  max-width: 1200px;
-  min-height: 600px;
-  border-radius: 10px;
+  min-height: 100vh;
   background-color: #fff;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -51,7 +48,11 @@ body.inactive .container {
 }
 
 .sidebar {
-  border-right: 1px solid #eee;
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100vh;
+  z-index: 100;
   max-width: 100px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -103,7 +104,7 @@ body.inactive .container {
 }
 
 .sidebar .item__link:hover, .sidebar .item__link.active {
-  background-color: #0C5DF4;
+  background-color: #0c5df4;
   color: #fff;
 }
 
@@ -118,11 +119,13 @@ body.inactive .container {
 
 .content {
   position: relative;
-  width: 100%;
+  left: 100px;
+  width: calc(100% - 100px);
+  height: 100vh;
+  top: 0;
   background-color: whitesmoke;
   border-radius: 0 10px 10px 0;
   padding: 10px;
-  max-height: 600px;
   overflow: hidden;
   overflow-y: scroll;
 }
@@ -198,10 +201,6 @@ body.inactive .container {
   margin-bottom: 5px;
 }
 
-::-webkit-scrollbar {
-  border-radius: 0 10px 10px 0;
-}
-
 .note__section_title {
   margin: 5px;
   font-weight: 500;
@@ -213,7 +212,6 @@ body.inactive .container {
   -ms-grid-columns: (minmax(250px, 300px))[auto-fit];
       grid-template-columns: repeat(auto-fit, minmax(250px, 300px));
   grid-gap: 10px;
-  max-height: 400px;
 }
 
 .notes__grid .note {
@@ -281,7 +279,7 @@ body.inactive .container {
           transform: translate(-50%, -50%);
   background-color: #fff;
   width: 50%;
-  max-width: 550px;
+  max-width: 650px;
   padding: 10px;
   border-radius: 10px;
   border: 2px solid dodgerblue;
@@ -306,7 +304,8 @@ body.inactive .container {
   pointer-events: all;
 }
 
-.popup input, .popup textarea {
+.popup input,
+.popup textarea {
   border: none;
   outline: none;
   font-size: 18px;
@@ -320,6 +319,6 @@ body.inactive .container {
   font-size: 16px;
   resize: none;
   font-weight: 400;
-  height: 150px;
-  max-height: 250px;
+  height: 250px;
+  max-height: 450px;
 }
