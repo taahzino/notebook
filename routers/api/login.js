@@ -9,12 +9,16 @@ const {
     loginValidators,
     loginvalidationHandler,
 } = require('../../middlewares/user/loginValidators');
+const checkLogin = require('../../middlewares/auth/checkLogin');
 
 // Controllers
-const { doLogin } = require('../../controllers/loginControllers');
+const { doLogin, doLogout } = require('../../controllers/loginControllers');
 
-// Handle requests
+// let user login
 router.post('/', loginValidators, loginvalidationHandler, doLogin);
+
+// let user logout
+router.delete('/', checkLogin, doLogout);
 
 // Export the router object
 module.exports = router;
