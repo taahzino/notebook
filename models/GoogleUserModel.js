@@ -28,6 +28,12 @@ const GoogleUserSchema = new mongoose.Schema(
             type: String,
             default: 'googleUser',
         },
+        notes: [
+            {
+                type: mongoose.Types.ObjectId,
+                ref: 'note',
+            },
+        ],
     },
     { timestamps: true }
 );
