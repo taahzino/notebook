@@ -17,5 +17,8 @@ notesRouter.get('/', checkLogin, getAllNotes);
 // Create a note
 notesRouter.post('/', checkLogin, noteValidation, saveNote);
 
+// Delete a note
+notesRouter.delete('/:id', checkLogin, noteValidation, saveNote);
+
 // Export the router object
 module.exports = notesRouter;

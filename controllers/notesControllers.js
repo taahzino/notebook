@@ -54,7 +54,7 @@ const getAllNotes = (req, res) => {
             __v: 0,
             password: 0,
         })
-        .exec((err, notes) => {
+        .exec((err, users) => {
             if (err) {
                 console.log(err);
                 res.status(500).json({
@@ -64,7 +64,7 @@ const getAllNotes = (req, res) => {
                 });
             } else {
                 res.status(200).json({
-                    notes,
+                    notes: users[0].notes,
                 });
             }
         });
