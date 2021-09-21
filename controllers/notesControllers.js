@@ -48,6 +48,32 @@ const saveNote = async (req, res) => {
     }
 };
 
+const getAllNotes = (req, res) => {
+    GeneralUser.find({
+        _id: res.locals.user._id,
+    })
+        .populate('notes', '')
+        .select({
+            __v: 0,
+            password: 0,
+        })
+        .exec((err, notes) => {
+            if (err) {
+                console.log(err);
+                res.status(500).json({
+                    errors: {
+                        common: { msg: 'Internal server error!' },
+                    },
+                });
+            } else {
+                res.status(200).json({
+                    notes,
+                });
+            }
+        });
+};
+
 module.exports = {
     saveNote,
+    getAllNotes,
 };
