@@ -1,15 +1,21 @@
 // Dependencies
 const jwt = require('jsonwebtoken');
+const GoogleUser = require('../../models/GoogleUserModel');
+const GeneralUser = require('../../models/UserModel');
 
-const checkLogin = (req, res, next) => {
+const checkLogin = async (req, res, next) => {
     if (req.isAuthenticated()) {
+        const user = await GoogleUser.findById(req.user);
+        res.locals.user = user;
         next();
     } else {
         const token = req.signedCookies[process.env.APP_NAME] || false;
         if (token) {
             try {
                 const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY);
-                res.locals.user = decoded;
+                const user = await GeneralUser.findById(decoded.userId);
+                user.password = undefined;
+                res.locals.user = user;
                 next();
             } catch (err) {
                 if (!res.locals.HTML) {
