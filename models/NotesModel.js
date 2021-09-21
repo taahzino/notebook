@@ -18,6 +18,10 @@ const NoteSchema = new mongoose.Schema(
             type: Boolean,
             default: false,
         },
+        category: {
+            type: String,
+            default: 'uncategorized',
+        },
     },
     { timestamps: true }
 );

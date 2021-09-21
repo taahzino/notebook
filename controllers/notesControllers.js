@@ -6,10 +6,7 @@ const NotesModel = require('../models/NotesModel');
 const saveNote = async (req, res) => {
     try {
         const { user } = res.locals;
-        const newNote = new NotesModel({
-            title: req.body.title,
-            content: req.body.content,
-        });
+        const newNote = new NotesModel(res.locals.note);
         const note = await newNote.save();
         if (user.userType === 'generalUser') {
             await GeneralUser.updateOne(
