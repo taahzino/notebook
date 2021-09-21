@@ -70,7 +70,48 @@ const getAllNotes = (req, res) => {
         });
 };
 
+const deleteANote = async (req, res) => {
+    try {
+        const { user } = res.locals;
+        await NotesModel.findByIdAndDelete(req.params.id);
+        if (user.userType === 'generalUser') {
+            await GeneralUser.updateOne(
+                {
+                    _id: user._id,
+                },
+                {
+                    $pull: {
+                        notes: req.params.id,
+                    },
+                }
+            );
+        }
+        if (user.userType === 'googleUser') {
+            await GoogleUser.updateOne(
+                {
+                    _id: user._id,
+                },
+                {
+                    $pull: {
+                        notes: req.params.id,
+                    },
+                }
+            );
+        }
+        res.status(200).json({
+            message: 'Note has been deleted!',
+        });
+    } catch (err) {
+        res.status(500).json({
+            errors: {
+                common: { msg: 'Internal Server Error' },
+            },
+        });
+    }
+};
+
 module.exports = {
     saveNote,
     getAllNotes,
+    deleteANote,
 };

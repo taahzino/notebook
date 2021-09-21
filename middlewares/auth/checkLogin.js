@@ -16,7 +16,6 @@ const checkLogin = async (req, res, next) => {
                 const user = await GeneralUser.findById(decoded.userId);
                 user.password = undefined;
                 res.locals.user = user;
-                console.log(user);
                 next();
             } catch (err) {
                 if (!res.locals.HTML) {
