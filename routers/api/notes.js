@@ -7,13 +7,21 @@ const { noteValidation } = require('../../middlewares/notes/noteValidators');
 const checkAccess = require('../../middlewares/notes/checkAccess');
 
 // Controllers
-const { saveNote, getAllNotes, deleteANote } = require('../../controllers/notesControllers');
+const {
+    saveNote,
+    getANote,
+    getAllNotes,
+    deleteANote,
+} = require('../../controllers/notesControllers');
 
 // Create express router
 const notesRouter = express.Router();
 
 // Get all notes
 notesRouter.get('/', checkLogin, getAllNotes);
+
+// Get a note
+notesRouter.get('/:id', checkLogin, checkAccess, getANote);
 
 // Create a note
 notesRouter.post('/', checkLogin, noteValidation, saveNote);

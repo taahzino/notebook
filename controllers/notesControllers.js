@@ -45,6 +45,22 @@ const saveNote = async (req, res) => {
     }
 };
 
+const getANote = async (req, res) => {
+    try {
+        const note = await NotesModel.findById(req.params.id);
+        res.status(200).json({
+            result: { note },
+            message: 'success',
+        });
+    } catch (err) {
+        res.status(500).json({
+            errors: {
+                common: { msg: 'Internal Server Error' },
+            },
+        });
+    }
+};
+
 const getAllNotes = (req, res) => {
     GeneralUser.find({
         _id: res.locals.user._id,
@@ -64,7 +80,10 @@ const getAllNotes = (req, res) => {
                 });
             } else {
                 res.status(200).json({
-                    notes: users[0].notes,
+                    message: 'success',
+                    result: {
+                        notes: users[0].notes,
+                    },
                 });
             }
         });
@@ -112,6 +131,7 @@ const deleteANote = async (req, res) => {
 
 module.exports = {
     saveNote,
+    getANote,
     getAllNotes,
     deleteANote,
 };
