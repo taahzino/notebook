@@ -89,6 +89,43 @@ const getAllNotes = (req, res) => {
         });
 };
 
+const updateANote = async (req, res) => {
+    try {
+        const { note } = res.locals;
+        const { id } = req.params;
+        if (note.title || note.content || note.category) {
+            if (!note.title) {
+                note.title = '';
+            }
+            if (!note.content) {
+                note.content = '';
+            }
+            if (!note.category) {
+                note.category = '';
+            }
+            const updated = await NotesModel.findByIdAndUpdate(id, note, { new: true });
+            res.status(200).json({
+                message: 'Note has been updated successfully',
+                result: {
+                    note: updated,
+                },
+            });
+        } else {
+            await NotesModel.findByIdAndDelete(id);
+            res.status(200).json({
+                message: 'Empty note deleted',
+                deleted: true,
+            });
+        }
+    } catch (err) {
+        res.status(500).json({
+            errors: {
+                common: { msg: 'Internal Server Error' },
+            },
+        });
+    }
+};
+
 const deleteANote = async (req, res) => {
     try {
         const { user } = res.locals;
@@ -133,5 +170,6 @@ module.exports = {
     saveNote,
     getANote,
     getAllNotes,
+    updateANote,
     deleteANote,
 };

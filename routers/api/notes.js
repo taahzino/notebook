@@ -3,7 +3,10 @@ const express = require('express');
 
 // Middlewares
 const checkLogin = require('../../middlewares/auth/checkLogin');
-const { noteValidation } = require('../../middlewares/notes/noteValidators');
+const {
+    createNoteValidation,
+    updateNoteValidation,
+} = require('../../middlewares/notes/noteValidators');
 const checkAccess = require('../../middlewares/notes/checkAccess');
 
 // Controllers
@@ -11,6 +14,7 @@ const {
     saveNote,
     getANote,
     getAllNotes,
+    updateANote,
     deleteANote,
 } = require('../../controllers/notesControllers');
 
@@ -24,7 +28,10 @@ notesRouter.get('/', checkLogin, getAllNotes);
 notesRouter.get('/:id', checkLogin, checkAccess, getANote);
 
 // Create a note
-notesRouter.post('/', checkLogin, noteValidation, saveNote);
+notesRouter.post('/', checkLogin, createNoteValidation, saveNote);
+
+// Update a note
+notesRouter.put('/:id', checkLogin, checkAccess, updateNoteValidation, updateANote);
 
 // Delete a note
 notesRouter.delete('/:id', checkLogin, checkAccess, deleteANote);
