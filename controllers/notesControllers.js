@@ -191,10 +191,41 @@ const deleteANote = async (req, res) => {
     }
 };
 
+const deleteAllNotes = async (req, res) => {
+    try {
+        const { user } = res.locals;
+        if (user.notes.length > 0) {
+            await NotesModel.deleteMany({
+                _id: { $in: user.notes },
+            });
+            if (user.userType === 'generalUser') {
+                await GeneralUser.findByIdAndUpdate(user._id, {
+                    notes: [],
+                });
+            }
+            if (user.userType === 'googleUser') {
+                await GoogleUser.findByIdAndUpdate(user._id, {
+                    notes: [],
+                });
+            }
+        }
+        res.status(200).json({
+            message: 'Notes have been deleted!',
+        });
+    } catch (err) {
+        res.status(500).json({
+            errors: {
+                common: { msg: 'Internal Server Error' },
+            },
+        });
+    }
+};
+
 module.exports = {
     saveNote,
     getANote,
     getAllNotes,
     updateANote,
     deleteANote,
+    deleteAllNotes,
 };

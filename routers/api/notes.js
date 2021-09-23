@@ -16,6 +16,7 @@ const {
     getAllNotes,
     updateANote,
     deleteANote,
+    deleteAllNotes,
 } = require('../../controllers/notesControllers');
 
 // Create express router
@@ -32,6 +33,9 @@ notesRouter.post('/', checkLogin, createNoteValidation, saveNote);
 
 // Update a note
 notesRouter.put('/:id', checkLogin, checkAccess, updateNoteValidation, updateANote);
+
+// Delete all notes
+notesRouter.delete('/all', checkLogin, deleteAllNotes);
 
 // Delete a note
 notesRouter.delete('/:id', checkLogin, checkAccess, deleteANote);
