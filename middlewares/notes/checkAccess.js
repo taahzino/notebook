@@ -4,9 +4,9 @@ const checkAccess = (req, res, next) => {
     if (typeof notes === 'object' && notes instanceof Array && notes.includes(id)) {
         next();
     } else {
-        res.status(400).json({
+        res.status(403).json({
             errors: {
-                common: { msg: 'Bad Request' },
+                common: { msg: 'You do not have access to this resource!' },
             },
         });
     }
