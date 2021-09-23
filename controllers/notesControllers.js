@@ -91,6 +91,7 @@ const getAllNotes = (req, res) => {
 
 const updateANote = async (req, res) => {
     try {
+        const { user } = res.locals;
         const { note } = res.locals;
         const { id } = req.params;
         if (note.title || note.content || note.category) {
@@ -112,6 +113,30 @@ const updateANote = async (req, res) => {
             });
         } else {
             await NotesModel.findByIdAndDelete(id);
+            if (user.userType === 'generalUser') {
+                await GeneralUser.updateOne(
+                    {
+                        _id: user._id,
+                    },
+                    {
+                        $pull: {
+                            notes: req.params.id,
+                        },
+                    }
+                );
+            }
+            if (user.userType === 'googleUser') {
+                await GoogleUser.updateOne(
+                    {
+                        _id: user._id,
+                    },
+                    {
+                        $pull: {
+                            notes: req.params.id,
+                        },
+                    }
+                );
+            }
             res.status(200).json({
                 message: 'Empty note deleted',
                 deleted: true,
