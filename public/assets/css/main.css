@@ -12,7 +12,11 @@ a {
 
 i,
 button {
-  -webkit-tap-highlight-color: none;
+  -webkit-tap-highlight-color: #fff;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
 }
 
 button {

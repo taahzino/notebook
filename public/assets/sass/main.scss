@@ -15,7 +15,8 @@ a {
 
 i,
 button {
-  -webkit-tap-highlight-color: none;
+  -webkit-tap-highlight-color: #fff;
+  user-select: none;
 }
 
 button {
