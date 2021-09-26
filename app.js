@@ -42,13 +42,13 @@ app.use(cookieParser(env.COOKIE_SECRET));
 app.use(passport.initialize());
 app.use(passport.session());
 
-// Serve static files
-app.use(express.static(`${__dirname}/public`));
-
 // Manage routes
 app.use('/api', require('./routers/api'));
 app.use('/auth', require('./routers/auth'));
 app.use('/', require('./routers/app'));
+
+// Serve static files
+app.use(express.static(`${__dirname}/public`));
 
 // Start the server
 app.listen(env.PORT, () => {
