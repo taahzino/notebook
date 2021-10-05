@@ -137,6 +137,7 @@ body.inactive .container {
   padding: 10px;
   overflow: hidden;
   overflow-y: scroll;
+  padding-bottom: 85px;
 }
 
 .content .searchBox {
@@ -224,14 +225,16 @@ body.inactive .container {
 .notes__grid {
   display: -ms-grid;
   display: grid;
-  -ms-grid-columns: (minmax(250px, 300px))[auto-fit];
-      grid-template-columns: repeat(auto-fit, minmax(250px, 300px));
+  -ms-grid-columns: (minmax(250px, 1fr))[auto-fit];
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   grid-gap: 10px;
 }
 
 .notes__grid .note {
+  position: relative;
   background-color: #fff;
   padding: 10px;
+  padding-bottom: 35px;
   border-radius: 10px;
   border: 2px solid transparent;
 }
@@ -247,6 +250,8 @@ body.inactive .container {
 }
 
 .note__options {
+  position: absolute;
+  bottom: 10px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -318,6 +323,8 @@ body.inactive .container {
 }
 
 .popup .note__options {
+  position: relative;
+  bottom: 0;
   opacity: 1;
   pointer-events: all;
 }
