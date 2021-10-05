@@ -12,6 +12,7 @@ const createNoteLinkSpan = createNoteLink.querySelector("span");
 const popup = document.querySelector(".popup");
 const textarea = popup.querySelector("textarea");
 const closePopupBtn = document.querySelector(".note__option_close");
+const deletePopupBtn = popup.querySelector(".note__option_delete");
 
 body.onclick = (e) => {
   if (
@@ -46,6 +47,11 @@ window.onload = () => {
   });
   // deactivate popup on click event of close button
   closePopupBtn.addEventListener("click", deactivatePopup);
+  deletePopupBtn.addEventListener("click", () => {
+    popup.querySelector('textarea').value = '';
+    popup.querySelector('input').value = '';
+    deactivatePopup();
+  });
 
   // fetch notes
   fetchAllNotes();
