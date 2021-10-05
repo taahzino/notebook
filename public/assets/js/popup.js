@@ -30,15 +30,6 @@ const deactivatePopup = () => {
   popup.classList.remove("active");
 };
 
-textarea.addEventListener("input", controlTextarea);
-
-createNoteLink.addEventListener("click", (e) => {
-  e.preventDefault();
-  activatePopup()
-});
-
-closePopupBtn.addEventListener("click", deactivatePopup);
-
 const bindNote = (note) => {
   note.addEventListener('click', () => {
     activatePopup();
@@ -47,29 +38,11 @@ const bindNote = (note) => {
   });
 }
 
-const allNotes = document.querySelectorAll('.note');
-
-allNotes.forEach((eachnote) => {
-  bindNote(eachnote);
-});
-
-body.onclick = (e) => {
-  if (
-    popup.classList.contains("active") &&
-    e.target !== createNoteLink &&
-    e.target !== createNoteLinkIcon &&
-    e.target !== createNoteLinkSpan &&
-    e.target.closest('.popup') !== popup &&
-    !e.target.classList.contains('note') &&
-    !e.target.closest('.note')
-  ) {
-    e.preventDefault();
-    deactivatePopup();
-  }
+export {
+  isReading,
+  controlTextarea,
+  activatePopup,
+  deactivatePopup,
+  bindNote,
 };
 
-body.addEventListener('keydown', (e) => {
-  if (e.key.toLowerCase().trim() === 'escape') {
-    deactivatePopup();
-  }
-});
