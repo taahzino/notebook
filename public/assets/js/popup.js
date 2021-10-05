@@ -1,4 +1,5 @@
 import { createOneNote } from "./notes/createOne.js";
+import { deleteOneNote } from "./notes/deleteOne.js";
 import { fetchAllNotes } from "./notes/fetchNotes.js";
 import { fetchOneNote } from "./notes/fetchOne.js";
 import { updateOneNote } from "./notes/updateOne.js";
@@ -9,12 +10,11 @@ const title = popup.querySelector("input#title");
 const content = popup.querySelector("textarea#content");
 
 var isReading = false;
-var shouldUpdate = false;
 var tempTitle;
 var tempContent;
 
 const controlTextarea = () => {
-  const clientHeight = content.clientHeight;
+  // const clientHeight = content.clientHeight;
   const scrollHeight = content.scrollHeight;
 
   if (scrollHeight < 350) {
@@ -57,15 +57,24 @@ const deactivatePopup = async () => {
 };
 
 const bindNote = async (note) => {
-  note.addEventListener('click', async () => {
-    activatePopup();
-    isReading = true;
-    const noteData = await fetchOneNote(note.getAttribute('data-id'));
-    popup.setAttribute('data-id', noteData._id);
-    title.value = noteData.title;
-    content.value = noteData.content;
-    tempTitle = noteData.title;
-    tempContent = noteData.content;
+  note.addEventListener('click', async (e) => {
+    const deleteBtn = note.querySelector('.note__option_delete');
+    if (e.target === deleteBtn || e.target.closest('button') === deleteBtn) {
+      console.log(e.target)
+      await deleteOneNote(note.getAttribute('data-id'));
+      note.remove();
+      await fetchAllNotes();
+      console.log(200);
+    } else {
+      activatePopup();
+      isReading = true;
+      const noteData = await fetchOneNote(note.getAttribute('data-id'));
+      popup.setAttribute('data-id', noteData._id);
+      title.value = noteData.title !== 'false' ? noteData.title : '';
+      content.value = noteData.content;
+      tempTitle = noteData.title !== 'false' ? noteData.title : '';
+      tempContent = noteData.content;
+    }
   });
 }
 

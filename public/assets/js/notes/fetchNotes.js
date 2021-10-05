@@ -18,9 +18,9 @@ const fetchAllNotes = async () => {
                 newNote.classList.add('note');
                 newNote.setAttribute('data-id', note._id);
                 newNote.innerHTML = `
-                    <h3 class="note__title">${note.title}</h3>
+                    <h3 class="note__title">${note.title !== 'false' ? note.title : ''}</h3>
                     <div name="note__summery" class="note__summery">
-                    ${note.content}
+                    ${note.content.substr(0, 50)}...
                     </div>
         
                     <div class="note__options">
