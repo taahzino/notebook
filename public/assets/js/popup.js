@@ -1,7 +1,7 @@
+import { createOneNote } from "./notes/createOne.js";
 import { fetchAllNotes } from "./notes/fetchNotes.js";
 import { fetchOneNote } from "./notes/fetchOne.js";
 import { updateOneNote } from "./notes/updateOne.js";
-
 
 const body = document.querySelector("body");
 const popup = document.querySelector(".popup");
@@ -9,6 +9,9 @@ const title = popup.querySelector("input#title");
 const content = popup.querySelector("textarea#content");
 
 var isReading = false;
+var shouldUpdate = false;
+var tempTitle;
+var tempContent;
 
 const controlTextarea = () => {
   const clientHeight = content.clientHeight;
@@ -22,25 +25,34 @@ const controlTextarea = () => {
 const activatePopup = () => {
   body.classList.add("inactive");
   popup.classList.add("active");
+  isReading = true;
 };
 
 const deactivatePopup = async () => {
   if (isReading) {
     if (popup.getAttribute('data-id').length === 24) {
-      await updateOneNote(popup.getAttribute('data-id'), {
-        title: title.value,
-        content: content.value,
-      });
+      if (title.value !== tempTitle || content.value !== tempContent) {
+        await updateOneNote(popup.getAttribute('data-id'), {
+          title: title.value,
+          content: content.value,
+        });
+        tempTitle = undefined;
+        tempContent = undefined;
+      }
+    } else {
+      if (title.value.length > 0 || content.value.length > 0) {
+        await createOneNote({
+          title: title.value,
+          content: content.value,
+        });
+      }
     }
-    title.value = '';
-    content.value = '';
-    popup.setAttribute('data-id', '');
   }
   title.value = '';
   content.value = '';
+  popup.setAttribute('data-id', '');
   body.classList.remove("inactive");
   popup.classList.remove("active");
-  popup.setAttribute('data-id', '');
   await fetchAllNotes();
 };
 
@@ -52,6 +64,8 @@ const bindNote = async (note) => {
     popup.setAttribute('data-id', noteData._id);
     title.value = noteData.title;
     content.value = noteData.content;
+    tempTitle = noteData.title;
+    tempContent = noteData.content;
   });
 }
 
