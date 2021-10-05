@@ -21,7 +21,8 @@ body.onclick = (e) => {
     e.target !== createNoteLinkSpan &&
     e.target.closest(".popup") !== popup &&
     !e.target.classList.contains("note") &&
-    !e.target.closest(".note")
+    !e.target.closest(".note") &&
+    window.getSelection().toString().length === 0
   ) {
     e.preventDefault();
     deactivatePopup();
