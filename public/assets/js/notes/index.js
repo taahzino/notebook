@@ -41,6 +41,7 @@ window.onload = () => {
   createNoteLink.addEventListener("click", (e) => {
     e.preventDefault();
     activatePopup();
+    popup.setAttribute('data-id', '');
   });
   // deactivate popup on click event of close button
   closePopupBtn.addEventListener("click", deactivatePopup);

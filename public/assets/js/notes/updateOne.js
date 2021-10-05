@@ -8,10 +8,7 @@ const updateOneNote = async (noteId, body) => {
     });
     const response = await request.json();
     if (request.status === 200) {
-        const { note } = response.result;
-        if (typeof note === 'object') {
-            return note;
-        }
+        return;
     }
 };
 

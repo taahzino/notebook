@@ -20,7 +20,6 @@ const controlTextarea = () => {
 };
 
 const activatePopup = () => {
-  popup.setAttribute('data-id', '');
   body.classList.add("inactive");
   popup.classList.add("active");
 };
@@ -32,13 +31,17 @@ const deactivatePopup = async () => {
         title: title.value,
         content: content.value,
       });
-      title.value = '';
-      content.innerText = '';
-      await fetchAllNotes();
     }
+    title.value = '';
+    content.value = '';
+    popup.setAttribute('data-id', '');
   }
+  title.value = '';
+  content.value = '';
   body.classList.remove("inactive");
   popup.classList.remove("active");
+  popup.setAttribute('data-id', '');
+  await fetchAllNotes();
 };
 
 const bindNote = async (note) => {
@@ -48,7 +51,7 @@ const bindNote = async (note) => {
     const noteData = await fetchOneNote(note.getAttribute('data-id'));
     popup.setAttribute('data-id', noteData._id);
     title.value = noteData.title;
-    content.innerText = noteData.content;
+    content.value = noteData.content;
   });
 }
 
