@@ -20,7 +20,7 @@ const fetchAllNotes = async () => {
                 newNote.innerHTML = `
                     <h3 class="note__title">${note.title !== 'false' ? note.title : ''}</h3>
                     <div name="note__summery" class="note__summery">
-                    ${note.content.substr(0, 50)}...
+                    ${note.content.substr(0, 180)}...
                     </div>
         
                     <div class="note__options">

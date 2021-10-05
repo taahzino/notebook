@@ -225,8 +225,8 @@ body.inactive .container {
 .notes__grid {
   display: -ms-grid;
   display: grid;
-  -ms-grid-columns: (minmax(250px, 1fr))[auto-fit];
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  -ms-grid-columns: (minmax(250px, 400px))[auto-fit];
+      grid-template-columns: repeat(auto-fit, minmax(250px, 400px));
   grid-gap: 10px;
 }
 
@@ -235,8 +235,14 @@ body.inactive .container {
   background-color: #fff;
   padding: 10px;
   padding-bottom: 35px;
+  min-height: 100px;
+  max-height: 160px;
   border-radius: 10px;
   border: 2px solid transparent;
+}
+
+.notes__grid .note .note__summery {
+  word-wrap: break-word;
 }
 
 .notes__grid .note:hover {
@@ -252,6 +258,7 @@ body.inactive .container {
 .note__options {
   position: absolute;
   bottom: 10px;
+  width: 90%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -318,11 +325,19 @@ body.inactive .container {
 }
 
 .popup.active {
+  z-index: 1000;
   opacity: 1;
   pointer-events: all;
 }
 
+.popup.active textarea,
+.popup.active input {
+  opacity: 1;
+  z-index: 1000;
+}
+
 .popup .note__options {
+  width: 100%;
   position: relative;
   bottom: 0;
   opacity: 1;
@@ -425,6 +440,7 @@ body.inactive .container {
   }
   .popup .note__options {
     position: absolute;
+    bottom: 85%;
     width: 100%;
     margin-bottom: 50px;
     opacity: 1;
