@@ -1,8 +1,8 @@
 import {
-    activatePopup, controlTextarea,
-    deactivatePopup
+  activatePopup, controlTextarea,
+  deactivatePopup
 } from "../popup.js";
-import { sendRequest } from "./fetchNotes.js";
+import { fetchAllNotes } from "./fetchNotes.js";
 
 
 const body = document.querySelector("body");
@@ -46,5 +46,5 @@ window.onload = () => {
   closePopupBtn.addEventListener("click", deactivatePopup);
 
   // fetch notes
-  sendRequest();
+  fetchAllNotes();
 };

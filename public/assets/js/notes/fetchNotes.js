@@ -6,7 +6,7 @@ const unpinnedNotes = document.querySelector('.unpinned__notes');
 
 const { origin } = window.location;
 
-const sendRequest = async () => {
+const fetchAllNotes = async () => {
     const request = await fetch(`${origin}/api/notes/`);
     const response = await request.json();
     if (request.status === 200) {
@@ -43,6 +43,6 @@ const sendRequest = async () => {
 }
 
 export {
-    sendRequest,
+    fetchAllNotes,
 };
 

@@ -1,40 +1,54 @@
+import { fetchAllNotes } from "./notes/fetchNotes.js";
+import { fetchOneNote } from "./notes/fetchOne.js";
+import { updateOneNote } from "./notes/updateOne.js";
+
+
 const body = document.querySelector("body");
-const createNoteLink = document.querySelector(".createNoteLink");
-const createNoteLinkIcon = createNoteLink.querySelector("i");
-const createNoteLinkSpan = createNoteLink.querySelector("span");
 const popup = document.querySelector(".popup");
-const textarea = popup.querySelector("textarea");
-const closePopupBtn = document.querySelector(".note__option_close");
+const title = popup.querySelector("input#title");
+const content = popup.querySelector("textarea#content");
 
 var isReading = false;
 
 const controlTextarea = () => {
-  const clientHeight = textarea.clientHeight;
-  const scrollHeight = textarea.scrollHeight;
+  const clientHeight = content.clientHeight;
+  const scrollHeight = content.scrollHeight;
 
   if (scrollHeight < 350) {
-    textarea.style.height = `${scrollHeight}px`;
+    content.style.height = `${scrollHeight}px`;
   }
 };
 
 const activatePopup = () => {
+  popup.setAttribute('data-id', '');
   body.classList.add("inactive");
   popup.classList.add("active");
 };
 
-const deactivatePopup = () => {
+const deactivatePopup = async () => {
   if (isReading) {
-    textarea.innerText = '';
+    if (popup.getAttribute('data-id').length === 24) {
+      await updateOneNote(popup.getAttribute('data-id'), {
+        title: title.value,
+        content: content.value,
+      });
+      title.value = '';
+      content.innerText = '';
+      await fetchAllNotes();
+    }
   }
   body.classList.remove("inactive");
   popup.classList.remove("active");
 };
 
-const bindNote = (note) => {
-  note.addEventListener('click', () => {
+const bindNote = async (note) => {
+  note.addEventListener('click', async () => {
     activatePopup();
     isReading = true;
-    textarea.innerText = 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit veritatis quod est, alias minima, magnam eos eum cupiditate aut nostrum in et, officia commodi natus quidem perferendis ex quas odit.';
+    const noteData = await fetchOneNote(note.getAttribute('data-id'));
+    popup.setAttribute('data-id', noteData._id);
+    title.value = noteData.title;
+    content.innerText = noteData.content;
   });
 }
 
