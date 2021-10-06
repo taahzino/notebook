@@ -1,1 +1,1 @@
-web: node app.js
+web: SET ENVIRONMENT=production && node app

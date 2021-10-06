@@ -4,8 +4,8 @@
   "description": "A node application",
   "main": "app.js",
   "scripts": {
-    "start": "node app",
-    "dev": "node dev && nodemon app"
+    "start": "SET ENVIRONMENT=production && node app",
+    "dev": "SET ENVIRONMENT=development && nodemon app"
   },
   "author": "Tahsin Ahmed Tushar <tushariar@gmail.com>",
   "license": "MIT",
