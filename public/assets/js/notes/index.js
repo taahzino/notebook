@@ -1,7 +1,8 @@
 import {
   activatePopup, bindNote, deactivatePopup
 } from "../popup.js";
-import { fetchAllNotes } from "./fetchNotes.js";
+
+// import { fetchAllNotes } from "./fetchNotes.js";
 
 
 
@@ -10,7 +11,6 @@ const createNoteLink = document.querySelector(".createNoteLink");
 const createNoteLinkIcon = createNoteLink.querySelector("i");
 const createNoteLinkSpan = createNoteLink.querySelector("span");
 const popup = document.querySelector(".popup");
-const textarea = popup.querySelector("textarea");
 const closePopupBtn = document.querySelector(".note__option_close");
 const deletePopupBtn = popup.querySelector(".note__option_delete");
 
@@ -57,5 +57,5 @@ window.onload = () => {
     bindNote(note);
   });
   // fetch notes
-  fetchAllNotes();
+  // fetchAllNotes();
 };

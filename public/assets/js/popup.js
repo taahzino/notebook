@@ -1,6 +1,6 @@
 import { createOneNote } from "./notes/createOne.js";
 import { deleteOneNote } from "./notes/deleteOne.js";
-import { fetchOneNote } from "./notes/fetchOne.js";
+import { fetchAllNotes } from "./notes/fetchNotes.js";
 import { updateOneNote } from "./notes/updateOne.js";
 
 const body = document.querySelector("body");
@@ -12,6 +12,12 @@ let unpinnedDiv = document.querySelector('.notes__grid.unpinned__notes');
 var isReading = false;
 var tempTitle;
 var tempContent;
+var allNotes;
+
+(async () => {
+  allNotes = await fetchAllNotes();
+})();
+
 
 const controlTextarea = () => {
   // const clientHeight = content.clientHeight;
@@ -44,6 +50,7 @@ const deactivatePopup = async () => {
             un.querySelector('.note__title').innerText = title.value;
             un.querySelector('.note__summery').innerText = content.value.substr(0, 180) + '...';
             unpinnedDiv.insertBefore(un, unpinnedDiv.childNodes[0]);
+            return;
           }
         });
         tempTitle = undefined;
@@ -83,6 +90,7 @@ const deactivatePopup = async () => {
   popup.setAttribute('data-id', '');
   title.value = '';
   content.value = '';
+  allNotes = await fetchAllNotes();
 };
 
 const bindNote = async (note) => {
@@ -91,15 +99,21 @@ const bindNote = async (note) => {
     if (e.target === deleteBtn || e.target.closest('button') === deleteBtn) {
       note.remove();
       await deleteOneNote(note.getAttribute('data-id'));
+      allNotes = await fetchAllNotes();
     } else {
       activatePopup();
       isReading = true;
-      const noteData = await fetchOneNote(note.getAttribute('data-id'));
-      popup.setAttribute('data-id', noteData._id);
-      title.value = noteData.title !== 'false' ? noteData.title : '';
-      content.value = noteData.content;
-      tempTitle = noteData.title !== 'false' ? noteData.title : '';
-      tempContent = noteData.content;
+      allNotes.forEach((noteData) => {
+        if (noteData._id === note.getAttribute('data-id')) {
+          popup.setAttribute('data-id', noteData._id);
+          title.value = noteData.title !== 'false' ? noteData.title : '';
+          content.value = noteData.content;
+          tempTitle = noteData.title !== 'false' ? noteData.title : '';
+          tempContent = noteData.content;
+
+          return;
+        }
+      });
     }
   });
 }
