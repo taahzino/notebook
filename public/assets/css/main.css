@@ -236,7 +236,6 @@ body.inactive .container {
   padding: 10px;
   padding-bottom: 35px;
   min-height: 100px;
-  max-height: 160px;
   border-radius: 10px;
   border: 2px solid transparent;
 }
@@ -257,7 +256,7 @@ body.inactive .container {
 
 .note__options {
   position: absolute;
-  bottom: 10px;
+  bottom: 5px;
   width: 90%;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -270,6 +269,7 @@ body.inactive .container {
   pointer-events: none;
   -webkit-transition: all 0.3s ease;
   transition: all 0.3s ease;
+  background-color: #fff;
 }
 
 .note__options button {
@@ -374,8 +374,14 @@ body.inactive .container {
 }
 
 @media screen and (max-width: 920px) {
+  body.inactive .container {
+    opacity: 1;
+  }
   .popup {
     max-width: 550px;
+  }
+  .popup.active {
+    opacity: 1;
   }
   .sidebar {
     max-width: 100%;
@@ -431,12 +437,19 @@ body.inactive .container {
 }
 
 @media screen and (max-width: 785px) {
+  body.inactive .searchBox {
+    display: none;
+  }
   .popup {
     max-width: 100%;
     width: 100%;
     height: 100%;
     border-radius: 0;
     border: 0;
+  }
+  .popup textarea {
+    width: 100%;
+    height: 80%;
   }
   .popup .note__options {
     position: absolute;
@@ -477,6 +490,10 @@ body.inactive .container {
     padding: 5px 10px;
     height: auto;
     max-height: 60px;
+  }
+  .note__options {
+    opacity: 1;
+    pointer-events: all;
   }
 }
 

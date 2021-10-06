@@ -1,8 +1,8 @@
 import {
-  activatePopup, controlTextarea,
-  deactivatePopup
+  activatePopup, bindNote, deactivatePopup
 } from "../popup.js";
 import { fetchAllNotes } from "./fetchNotes.js";
+
 
 
 const body = document.querySelector("body");
@@ -38,7 +38,7 @@ body.addEventListener("keydown", (e) => {
 
 window.onload = () => {
   // control textarea height
-  textarea.addEventListener("input", controlTextarea);
+  // textarea.addEventListener("input", controlTextarea);
   // activate popup
   createNoteLink.addEventListener("click", (e) => {
     e.preventDefault();
@@ -53,6 +53,9 @@ window.onload = () => {
     deactivatePopup();
   });
 
+  document.querySelectorAll('.notes__grid .note').forEach(note => {
+    bindNote(note);
+  });
   // fetch notes
   fetchAllNotes();
 };

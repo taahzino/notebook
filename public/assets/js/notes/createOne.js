@@ -6,8 +6,10 @@ const createOneNote = async (body) => {
         },
         body: JSON.stringify(body),
     });
+    const response = await request.json();
+
     if (request.status === 200) {
-        return;
+        return response.note;
     }
 };
 

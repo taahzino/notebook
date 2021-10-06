@@ -199,7 +199,6 @@ body {
     padding: 10px;
     padding-bottom: 35px;
     min-height: 100px;
-    max-height: 160px;
     border-radius: 10px;
     border: 2px solid transparent;
 
@@ -221,7 +220,7 @@ body {
 
 .note__options {
   position: absolute;
-  bottom: 10px;
+  bottom: 5px;
   width: 90%;
   display: flex;
   justify-content: space-between;
@@ -229,6 +228,7 @@ body {
   opacity: 0;
   pointer-events: none;
   transition: all 0.3s ease;
+  background-color: #fff;
   button {
     background-color: transparent;
     outline: none;
@@ -313,8 +313,18 @@ body {
 }
 
 @media screen and (max-width: 920px) {
+  body {
+    &.inactive {
+      .container {
+        opacity: 1;
+      }
+    }
+  }
   .popup {
     max-width: 550px;
+    &.active {
+      opacity: 1;
+    }
   }
   .sidebar {
     max-width: 100%;
@@ -357,12 +367,21 @@ body {
 }
 
 @media screen and (max-width: 785px) {
+  body.inactive {
+    .searchBox {
+      display: none;
+    }
+  }
   .popup {
     max-width: 100%;
     width: 100%;
     height: 100%;
     border-radius: 0;
     border: 0;
+    textarea {
+      width: 100%;
+      height: 80%;
+    }
     .note__options {
       position: absolute;
       bottom: 85%;
@@ -402,6 +421,10 @@ body {
       height: auto;
       max-height: 60px;
     }
+  }
+  .note__options {
+    opacity: 1;
+    pointer-events: all;
   }
 }
 

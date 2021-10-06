@@ -61,7 +61,7 @@ const getANote = async (req, res) => {
     }
 };
 
-const getAllNotes = (req, res) => {
+const getAllNotes = (req, res, next) => {
     if (res.locals.user.userType === 'generalUser') {
         GeneralUser.find({
             _id: res.locals.user._id,
@@ -86,12 +86,10 @@ const getAllNotes = (req, res) => {
                         },
                     });
                 } else {
-                    res.status(200).json({
-                        message: 'success',
-                        result: {
-                            notes: users[0].notes,
-                        },
-                    });
+                    res.locals.result = {
+                        notes: users[0].notes,
+                    };
+                    next();
                 }
             });
     } else {

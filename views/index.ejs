@@ -68,7 +68,30 @@
 
       <p class="note__section_title other__title">Others</p>
       <div class="notes__grid unpinned__notes">
+        <% if (result && result.notes && typeof result.notes==='object' ) { %>
+          <% result.notes.forEach((note)=> {%>
+            <div class="note" data-id="<%= note._id %>">
+              <h3 class="note__title">
+                <%= note.title !=='false' ? note.title : '' %>
+              </h3>
+              <div name="note__summery" class="note__summery">
+                <%= note.content.substr(0, 180) %>...
+              </div>
 
+              <div class="note__options">
+                <button class="note__option_pin">
+                  <i class="bx bx-pin"></i>
+                </button>
+                <button class="note__option_heart">
+                  <i class="bx bx-heart-circle"></i>
+                </button>
+                <button class="note__option_delete">
+                  <i class="bx bx-trash"></i>
+                </button>
+              </div>
+            </div>
+            <%})%>
+              <%} %>
       </div>
     </div>
   </div>

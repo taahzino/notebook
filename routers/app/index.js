@@ -7,11 +7,14 @@ const checkLogin = require('../../middlewares/auth/checkLogin');
 const isLoggedIn = require('../../middlewares/auth/isLoggedIn');
 const { doLogout } = require('../../controllers/loginControllers');
 
+// Controllers
+const { getAllNotes } = require('../../controllers/notesControllers');
+
 // Create express router
 const appRouter = express.Router();
 
 // Handle requests
-appRouter.get('/', decorateHTML, checkLogin, (req, res) => {
+appRouter.get('/', decorateHTML, checkLogin, getAllNotes, (req, res) => {
     res.render('index');
 });
 appRouter.get('/login', decorateHTML, isLoggedIn, (req, res) => {

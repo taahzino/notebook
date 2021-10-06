@@ -8,6 +8,7 @@ const {
     updateNoteValidation,
 } = require('../../middlewares/notes/noteValidators');
 const checkAccess = require('../../middlewares/notes/checkAccess');
+const { serveNotes } = require('../../middlewares/notes/serveResults');
 
 // Controllers
 const {
@@ -23,7 +24,7 @@ const {
 const notesRouter = express.Router();
 
 // Get all notes
-notesRouter.get('/', checkLogin, getAllNotes);
+notesRouter.get('/', checkLogin, getAllNotes, serveNotes);
 
 // Get a note
 notesRouter.get('/:id', checkLogin, checkAccess, getANote);
