@@ -18,7 +18,6 @@ var allNotes;
   allNotes = await fetchAllNotes();
 })();
 
-
 const controlTextarea = () => {
   // const clientHeight = content.clientHeight;
   const scrollHeight = content.scrollHeight;
@@ -53,6 +52,13 @@ const deactivatePopup = async () => {
             return;
           }
         });
+        allNotes.forEach((n) => {
+          if (n._id === popup.getAttribute('data-id')) {
+            n.title = title.value;
+            n.value = content.value;
+            return;
+          }
+        });
         tempTitle = undefined;
         tempContent = undefined;
       }
@@ -62,6 +68,7 @@ const deactivatePopup = async () => {
           title: title.value,
           content: content.value,
         });
+        allNotes.push(newNote);
         const newNoteHTML = document.createElement('div');
         newNoteHTML.classList.add('note');
         newNoteHTML.setAttribute('data-id', newNote._id);
@@ -90,21 +97,26 @@ const deactivatePopup = async () => {
   popup.setAttribute('data-id', '');
   title.value = '';
   content.value = '';
-  allNotes = await fetchAllNotes();
 };
 
 const bindNote = async (note) => {
   note.addEventListener('click', async (e) => {
+    const dataId = note.getAttribute('data-id');
     const deleteBtn = note.querySelector('.note__option_delete');
     if (e.target === deleteBtn || e.target.closest('button') === deleteBtn) {
       note.remove();
-      await deleteOneNote(note.getAttribute('data-id'));
-      allNotes = await fetchAllNotes();
+      await deleteOneNote(dataId);
+      for (let i = 0; i < allNotes.length; i++) {
+        if (allNotes[i]._id === dataId) {
+          allNotes.splice(allNotes[i],);
+          return;
+        }
+      }
     } else {
       activatePopup();
       isReading = true;
       allNotes.forEach((noteData) => {
-        if (noteData._id === note.getAttribute('data-id')) {
+        if (noteData._id === dataId) {
           popup.setAttribute('data-id', noteData._id);
           title.value = noteData.title !== 'false' ? noteData.title : '';
           content.value = noteData.content;
