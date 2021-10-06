@@ -4,8 +4,6 @@ import {
 
 // import { fetchAllNotes } from "./fetchNotes.js";
 
-
-
 const body = document.querySelector("body");
 const createNoteLink = document.querySelector(".createNoteLink");
 const createNoteLinkIcon = createNoteLink.querySelector("i");
@@ -37,9 +35,6 @@ body.addEventListener("keydown", (e) => {
 });
 
 window.onload = () => {
-  // control textarea height
-  // textarea.addEventListener("input", controlTextarea);
-  // activate popup
   createNoteLink.addEventListener("click", (e) => {
     e.preventDefault();
     activatePopup();

@@ -37,45 +37,47 @@ const deactivatePopup = async () => {
   body.classList.remove("inactive");
   popup.classList.remove("active");
   const unpinnedNotes = document.querySelectorAll('.notes__grid.unpinned__notes .note');
+  let newTitle = title.value;
+  let newContent = content.value;
+  title.value = '';
+  content.value = '';
   if (isReading) {
     if (popup.getAttribute('data-id').length === 24) {
-      if (title.value !== tempTitle || content.value !== tempContent) {
-        await updateOneNote(popup.getAttribute('data-id'), {
-          title: title.value,
-          content: content.value,
-        });
+      if (newTitle !== tempTitle || newContent !== tempContent) {
         unpinnedNotes.forEach((un) => {
           if (un.getAttribute('data-id') === popup.getAttribute('data-id')) {
-            un.querySelector('.note__title').innerText = title.value;
-            un.querySelector('.note__summery').innerText = content.value.substr(0, 180) + '...';
+            un.querySelector('.note__title').innerText = newTitle;
+            un.querySelector('.note__summery').innerText = newContent.substr(0, 180) + '...';
             unpinnedDiv.insertBefore(un, unpinnedDiv.childNodes[0]);
             return;
           }
         });
         allNotes.forEach((n) => {
           if (n._id === popup.getAttribute('data-id')) {
-            n.title = title.value;
-            n.value = content.value;
+            n.title = newTitle;
+            n.value = newContent;
             return;
           }
         });
+        await updateOneNote(popup.getAttribute('data-id'), {
+          title: newTitle,
+          content: newContent,
+        });
         tempTitle = undefined;
         tempContent = undefined;
+        newTitle = undefined;
+        newContent = undefined;
       }
     } else {
-      if (title.value.length > 0 || content.value.length > 0) {
-        const newNote = await createOneNote({
-          title: title.value,
-          content: content.value,
-        });
-        allNotes.push(newNote);
+      if (newTitle.length > 0 || newContent.length > 0) {
         const newNoteHTML = document.createElement('div');
         newNoteHTML.classList.add('note');
-        newNoteHTML.setAttribute('data-id', newNote._id);
+        let tempId = `temp${Math.random().toString().split(".").join('')}`;
+        newNoteHTML.setAttribute('data-id', tempId);
         newNoteHTML.innerHTML = `
-            <h3 class="note__title">${newNote.title !== 'false' ? newNote.title : ''}</h3>
+            <h3 class="note__title">${newTitle !== 'false' ? newTitle : ''}</h3>
             <div name="note__summery" class="note__summery">
-            ${newNote.content.substr(0, 180)}...
+            ${newContent !== 'false' ? newContent.substr(0, 180) : ''}...
             </div>
             <div class="note__options">
                 <button class="note__option_pin">
@@ -91,12 +93,26 @@ const deactivatePopup = async () => {
         `;
         unpinnedDiv.insertBefore(newNoteHTML, unpinnedDiv.childNodes[0]);
         bindNote(newNoteHTML);
+        const newNote = await createOneNote({
+          title: newTitle,
+          content: newContent,
+        });
+        allNotes.push(newNote);
+        adjustNewNote(tempId, newNote._id);
       }
     }
   }
   popup.setAttribute('data-id', '');
-  title.value = '';
-  content.value = '';
+};
+
+const adjustNewNote = (tempId, newId) => {
+  const unpinnedNotes = document.querySelectorAll('.notes__grid.unpinned__notes .note');
+  unpinnedNotes.forEach((un) => {
+    if (un.getAttribute('data-id') === tempId) {
+      un.setAttribute('data-id', newId);
+      return;
+    }
+  });
 };
 
 const bindNote = async (note) => {
