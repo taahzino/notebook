@@ -53,7 +53,5 @@ app.use(express.static(`${__dirname}/public`));
 // Start the server
 app.listen(env.PORT, () => {
     console.log(`Server is running in ${env.ENVIRONMENT} mode on PORT ${env.PORT}`);
-    if (env.ENVIRONMENT === 'development') {
-        console.log(`Go: http://localhost:${env.PORT}/`);
-    }
+    console.log(`Go: ${env.APP_URL}`);
 });
