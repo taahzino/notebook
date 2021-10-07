@@ -269,6 +269,39 @@ const deleteAllNotes = async (req, res) => {
     }
 };
 
+const pinANote = async (req, res) => {
+    const id =
+        typeof req.params.id === 'string' && req.params.id.length === 24 ? req.params.id : false;
+    const bool = req.params.bool === 'true';
+    if (id) {
+        try {
+            const note = await NotesModel.findByIdAndUpdate(
+                id,
+                {
+                    pinned: bool,
+                },
+                { new: true }
+            );
+            res.status(200).json({
+                result: { note },
+                message: 'success',
+            });
+        } catch (err) {
+            res.status(500).json({
+                errors: {
+                    common: { msg: 'Internal Server Error' },
+                },
+            });
+        }
+    } else {
+        res.status(400).json({
+            errors: {
+                common: { msg: 'Invalid ID' },
+            },
+        });
+    }
+};
+
 module.exports = {
     saveNote,
     getANote,
@@ -276,4 +309,5 @@ module.exports = {
     updateANote,
     deleteANote,
     deleteAllNotes,
+    pinANote,
 };
