@@ -93,19 +93,30 @@ const deactivatePopup = async () => {
         `;
         unpinnedDiv.insertBefore(newNoteHTML, unpinnedDiv.childNodes[0]);
         bindNote(newNoteHTML);
+        allNotes.push({
+          _id: tempId,
+          title: newTitle,
+          content: newContent,
+        });
         const newNote = await createOneNote({
           title: newTitle,
           content: newContent,
         });
-        allNotes.push(newNote);
-        adjustNewNote(tempId, newNote._id);
+        adjustNewNote(tempId, newNote._id, newNote);
       }
     }
   }
   popup.setAttribute('data-id', '');
 };
 
-const adjustNewNote = (tempId, newId) => {
+const adjustNewNote = (tempId, newId, newNote) => {
+  for (let i = 0; i < allNotes.length; i++) {
+    if (allNotes[i]._id === tempId) {
+      allNotes.splice(i, 1)
+      allNotes.push(newNote);
+      break;
+    }
+  }
   const unpinnedNotes = document.querySelectorAll('.notes__grid.unpinned__notes .note');
   unpinnedNotes.forEach((un) => {
     if (un.getAttribute('data-id') === tempId) {
@@ -123,7 +134,7 @@ const bindNote = async (note) => {
       note.remove();
       for (let i = 0; i < allNotes.length; i++) {
         if (allNotes[i]._id === dataId) {
-          allNotes.splice(allNotes[i],1);
+          allNotes.splice(i, 1);
           return;
         }
       }
