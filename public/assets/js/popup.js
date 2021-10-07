@@ -121,13 +121,13 @@ const bindNote = async (note) => {
     const deleteBtn = note.querySelector('.note__option_delete');
     if (e.target === deleteBtn || e.target.closest('button') === deleteBtn) {
       note.remove();
-      await deleteOneNote(dataId);
       for (let i = 0; i < allNotes.length; i++) {
         if (allNotes[i]._id === dataId) {
-          allNotes.splice(allNotes[i],);
+          allNotes.splice(allNotes[i],1);
           return;
         }
       }
+      await deleteOneNote(dataId);
     } else {
       activatePopup();
       isReading = true;
