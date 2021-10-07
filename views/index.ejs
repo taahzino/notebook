@@ -84,7 +84,7 @@
 
                 <div class="note__options">
                   <button class="note__option_pin">
-                    <i class="bx bx-pin"></i>
+                    <i class="bx bx<%= note.pinned === true ? 's' : ''%>-pin"></i>
                   </button>
                   <button class="note__option_heart">
                     <i class="bx bx-heart-circle"></i>

@@ -1,6 +1,7 @@
 import { createOneNote } from "./notes/createOne.js";
 import { deleteOneNote } from "./notes/deleteOne.js";
 import { fetchAllNotes } from "./notes/fetchNotes.js";
+import { pinOneNote } from "./notes/pinOne.js";
 import { updateOneNote } from "./notes/updateOne.js";
 
 const body = document.querySelector("body");
@@ -9,6 +10,7 @@ const title = popup.querySelector("input#title");
 const content = popup.querySelector("textarea#content");
 let pinnedDiv = document.querySelector('.notes__grid.pinned__notes');
 let unpinnedDiv = document.querySelector('.notes__grid.unpinned__notes');
+const contentSection = document.querySelector('.container .content');
 
 var isReading = false;
 var tempTitle;
@@ -138,8 +140,6 @@ const adjustNewNote = (tempId, newId, newNote) => {
   for (let i = 0; i < allNotes.unpinned.length; i++) {
     if (allNotes.unpinned[i]._id === tempId) {
       allNotes.unpinned[i] = newNote;
-      // allNotes.unpinned.splice(i, 1)
-      // allNotes.unpinned.push(newNote);
       break;
     }
   }
@@ -152,7 +152,7 @@ const adjustNewNote = (tempId, newId, newNote) => {
   });
 };
 
-const deleteNote = async (note) => {
+const deleteThisNote = async (note) => {
   const dataId = note.getAttribute('data-id');
   const isPinned = note.getAttribute('data-note-isPinned');
   const wheretolookup = isPinned === 'true' ? allNotes.pinned : allNotes.unpinned;
@@ -166,14 +166,74 @@ const deleteNote = async (note) => {
   await deleteOneNote(dataId);
 };
 
+const pinThisNote = async (note, dataId, isPinned) => {
+  // decide where to lookup
+  const wheretolookup = isPinned === 'true' ? allNotes.pinned : allNotes.unpinned;
+  const newDestination = isPinned === 'true' ? allNotes.unpinned : allNotes.pinned;
+  // decide boolean
+  let bool = isPinned === 'true' ? false : true;
+  // change data attribute
+  note.setAttribute('data-note-isPinned', `${bool}`);
+  // change the icon
+  if (bool) {
+    note.querySelector('.note__option_pin i').setAttribute('class', 'bx bxs-pin');
+  } else {
+    note.querySelector('.note__option_pin i').setAttribute('class', 'bx bx-pin');
+  }
+
+  // effect in the dom
+  if (bool && allNotes.pinned.length === 0) {
+    const pinnedTitle = document.createElement('p');
+    pinnedTitle.setAttribute('class', 'note__section_title pinned__title');
+    pinnedTitle.innerText = 'Pinned';
+    contentSection.insertBefore(pinnedTitle, unpinnedDiv);
+    
+    const pinnedDiv = document.createElement('div');
+    pinnedDiv.setAttribute('class', 'notes__grid pinned__notes');
+    pinnedDiv.appendChild(note);
+    contentSection.insertBefore(pinnedDiv, unpinnedDiv);
+
+    const othersTitle = document.createElement('p');
+    othersTitle.setAttribute('class', 'note__section_title other__title');
+    othersTitle.innerText = 'Others';
+    contentSection.insertBefore(othersTitle, unpinnedDiv);
+  }
+  if (bool && allNotes.pinned.length > 0 ) {
+    let pinnedDiv = document.querySelector('.notes__grid.pinned__notes');
+    pinnedDiv.insertBefore(note, pinnedDiv.childNodes[0]);
+  }
+  if (!bool) {
+    unpinnedDiv.insertBefore(note, unpinnedDiv.childNodes[0]);
+  }
+  // change from allNotes object
+  for (let i = 0; i < wheretolookup.length; i++) {
+    if (wheretolookup[i]._id === dataId) {
+      wheretolookup[i].pinned = bool;
+      newDestination.push(wheretolookup[i]);
+      wheretolookup.splice(i, 1);
+    }
+  }
+  if (allNotes.pinned.length === 0) {
+    contentSection.querySelector('.note__section_title.pinned__title').remove();
+    contentSection.querySelector('.notes__grid.pinned__notes').remove();
+    contentSection.querySelector('.note__section_title.other__title').remove();
+  }
+  // request to pin
+  await pinOneNote(dataId, bool);
+  bool = undefined;
+};
+
 const bindNote = async (note) => {
   note.addEventListener('click', async (e) => {
     const dataId = note.getAttribute('data-id');
     const isPinned = note.getAttribute('data-note-isPinned');
     const wheretolookup = isPinned === 'true' ? allNotes.pinned : allNotes.unpinned;
     const deleteBtn = note.querySelector('.note__option_delete');
+    const pinBtn = note.querySelector('.note__option_pin');
     if (e.target === deleteBtn || e.target.closest('button') === deleteBtn) {
-      deleteNote(note);
+      deleteThisNote(note);
+    } else if (e.target === pinBtn || e.target.closest('button') === pinBtn) {
+      pinThisNote(note, dataId, isPinned);
     } else {
       activatePopup();
       isReading = true;
