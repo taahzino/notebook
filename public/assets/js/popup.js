@@ -7,6 +7,7 @@ const body = document.querySelector("body");
 const popup = document.querySelector(".popup");
 const title = popup.querySelector("input#title");
 const content = popup.querySelector("textarea#content");
+let pinnedDiv = document.querySelector('.notes__grid.pinned__notes');
 let unpinnedDiv = document.querySelector('.notes__grid.unpinned__notes');
 
 var isReading = false;
@@ -36,26 +37,32 @@ const activatePopup = () => {
 const deactivatePopup = async () => {
   body.classList.remove("inactive");
   popup.classList.remove("active");
-  const unpinnedNotes = document.querySelectorAll('.notes__grid.unpinned__notes .note');
+  const allNotesDOM = document.querySelectorAll('.note');
   let newTitle = title.value;
   let newContent = content.value;
   title.value = '';
   content.value = '';
   if (isReading) {
     if (popup.getAttribute('data-id').length === 24) {
+      const isPinned = popup.getAttribute('data-note-isPinned');
+      let wheretolookup = isPinned === 'true' ? allNotes.pinned : allNotes.unpinned;
       if (newTitle !== tempTitle || newContent !== tempContent) {
-        unpinnedNotes.forEach((un) => {
-          if (un.getAttribute('data-id') === popup.getAttribute('data-id')) {
-            un.querySelector('.note__title').innerText = newTitle;
-            un.querySelector('.note__summery').innerText = newContent.substr(0, 180) + '...';
-            unpinnedDiv.insertBefore(un, unpinnedDiv.childNodes[0]);
+        allNotesDOM.forEach((note) => {
+          if (note.getAttribute('data-id') === popup.getAttribute('data-id')) {
+            note.querySelector('.note__title').innerText = newTitle;
+            note.querySelector('.note__summery').innerText = newContent.substr(0, 180) + '...';
+            if (isPinned.toString === 'true') {
+              pinnedDiv.insertBefore(note, pinnedDiv.childNodes[0]);
+            } else {
+              unpinnedDiv.insertBefore(note, unpinnedDiv.childNodes[0]);
+            }
             return;
           }
         });
-        allNotes.forEach((n) => {
-          if (n._id === popup.getAttribute('data-id')) {
-            n.title = newTitle;
-            n.value = newContent;
+        wheretolookup.forEach((note) => {
+          if (note._id === popup.getAttribute('data-id')) {
+            note.title = newTitle;
+            note.value = newContent;
             return;
           }
         });
@@ -74,6 +81,7 @@ const deactivatePopup = async () => {
         newNoteHTML.classList.add('note');
         let tempId = `temp${Math.random().toString().split(".").join('')}`;
         newNoteHTML.setAttribute('data-id', tempId);
+        newNoteHTML.setAttribute('data-note-isPinned', 'false');
         newNoteHTML.innerHTML = `
             <h3 class="note__title">${newTitle !== 'false' ? newTitle : ''}</h3>
             <div name="note__summery" class="note__summery">
@@ -93,7 +101,7 @@ const deactivatePopup = async () => {
         `;
         unpinnedDiv.insertBefore(newNoteHTML, unpinnedDiv.childNodes[0]);
         bindNote(newNoteHTML);
-        allNotes.push({
+        allNotes.unpinned.push({
           _id: tempId,
           title: newTitle,
           content: newContent,
@@ -107,13 +115,14 @@ const deactivatePopup = async () => {
     }
   }
   popup.setAttribute('data-id', '');
+  popup.setAttribute('data-note-isPinned', '');
 };
 
 const adjustNewNote = (tempId, newId, newNote) => {
-  for (let i = 0; i < allNotes.length; i++) {
-    if (allNotes[i]._id === tempId) {
-      allNotes.splice(i, 1)
-      allNotes.push(newNote);
+  for (let i = 0; i < allNotes.unpinned.length; i++) {
+    if (allNotes.unpinned[i]._id === tempId) {
+      allNotes.unpinned.splice(i, 1)
+      allNotes.unpinned.push(newNote);
       break;
     }
   }
@@ -129,12 +138,14 @@ const adjustNewNote = (tempId, newId, newNote) => {
 const bindNote = async (note) => {
   note.addEventListener('click', async (e) => {
     const dataId = note.getAttribute('data-id');
+    const isPinned = note.getAttribute('data-note-isPinned');
+    let wheretolookup = isPinned === 'true' ? allNotes.pinned : allNotes.unpinned;
     const deleteBtn = note.querySelector('.note__option_delete');
     if (e.target === deleteBtn || e.target.closest('button') === deleteBtn) {
       note.remove();
-      for (let i = 0; i < allNotes.length; i++) {
-        if (allNotes[i]._id === dataId) {
-          allNotes.splice(i, 1);
+      for (let i = 0; i < wheretolookup.length; i++) {
+        if (wheretolookup[i]._id === dataId) {
+          wheretolookup.splice(i, 1);
           break;
         }
       }
@@ -142,9 +153,10 @@ const bindNote = async (note) => {
     } else {
       activatePopup();
       isReading = true;
-      allNotes.forEach((noteData) => {
+      wheretolookup.forEach((noteData) => {
         if (noteData._id === dataId) {
           popup.setAttribute('data-id', noteData._id);
+          popup.setAttribute('data-note-pinned', `${noteData.pinned.toString() === 'true' ? 'true' : 'false'}`);
           title.value = noteData.title !== 'false' ? noteData.title : '';
           content.value = noteData.content;
           tempTitle = noteData.title !== 'false' ? noteData.title : '';
