@@ -180,10 +180,7 @@ body {
 .note__section_title {
   margin: 5px;
   font-weight: 500;
-  display: none;
-  &.show {
-    display: block;
-  }
+  display: block;
 }
 
 .notes__grid {

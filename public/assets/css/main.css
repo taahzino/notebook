@@ -215,10 +215,6 @@ body.inactive .container {
 .note__section_title {
   margin: 5px;
   font-weight: 500;
-  display: none;
-}
-
-.note__section_title.show {
   display: block;
 }
 

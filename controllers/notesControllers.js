@@ -86,7 +86,19 @@ const getAllNotes = (req, res, next) => {
                         },
                     });
                 } else {
-                    res.locals.allNotes = users[0].notes;
+                    const allNotes = users[0].notes;
+                    const pinned = [];
+                    const unpinned = [];
+                    allNotes.forEach((note) => {
+                        if (note.pinned === true) {
+                            pinned.push(note);
+                        } else {
+                            unpinned.push(note);
+                        }
+                    });
+                    res.locals.result = {
+                        notes: { pinned, unpinned },
+                    };
                     next();
                 }
             });
