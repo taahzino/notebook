@@ -86,9 +86,7 @@ const getAllNotes = (req, res, next) => {
                         },
                     });
                 } else {
-                    res.locals.result = {
-                        notes: users[0].notes,
-                    };
+                    res.locals.allNotes = users[0].notes;
                     next();
                 }
             });
