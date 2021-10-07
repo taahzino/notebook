@@ -99,8 +99,8 @@
           <p class="note__section_title other__title">Others</p>
           <%}%>
             <%} %>
-              <%if (result.notes.unpinned && result.notes.unpinned.length> 0) {%>
-                <div class="notes__grid unpinned__notes">
+              <div class="notes__grid unpinned__notes">
+                <%if (result.notes.unpinned && result.notes.unpinned.length> 0) {%>
                   <% result.notes.unpinned.forEach((note)=> {%>
                     <div class="note" data-id="<%= note._id %>"
                       data-note-isPinned="<%= note.pinned === true || note.pinned === 'true' ? 'true' : 'false' %>">
@@ -124,8 +124,8 @@
                       </div>
                     </div>
                     <%})%>
-                </div>
-                <%}%>
+                      <%}%>
+              </div>
     </div>
   </div>
 
