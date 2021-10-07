@@ -70,10 +70,21 @@ const deactivatePopup = async () => {
           title: newTitle,
           content: newContent,
         });
-        tempTitle = undefined;
-        tempContent = undefined;
-        newTitle = undefined;
-        newContent = undefined;
+      }
+      if (newTitle.trim() === '' && newContent.trim() === '') {
+        for (let i = 0; i < allNotesDOM.length; i++) {
+          if (allNotesDOM[i].getAttribute('data-id') === popup.getAttribute('data-id')) {
+            allNotesDOM[i].remove();
+            break;
+          }
+        }
+        for (let i = 0; i < wheretolookup.length; i++) {
+          if (wheretolookup[i]._id === popup.getAttribute('data-id')) {
+            wheretolookup[i].title = newTitle;
+            wheretolookup[i].value = newContent;
+            wheretolookup.splice(i, 1);
+          }
+        }
       }
     } else {
       if (newTitle.length > 0 || newContent.length > 0) {
@@ -114,6 +125,10 @@ const deactivatePopup = async () => {
       }
     }
   }
+  tempTitle = undefined;
+  tempContent = undefined;
+  newTitle = undefined;
+  newContent = undefined;
   popup.setAttribute('data-id', '');
   popup.setAttribute('data-note-isPinned', '');
 };
@@ -135,21 +150,28 @@ const adjustNewNote = (tempId, newId, newNote) => {
   });
 };
 
+const deleteNote = async (note) => {
+  const dataId = note.getAttribute('data-id');
+  const isPinned = note.getAttribute('data-note-isPinned');
+  const wheretolookup = isPinned === 'true' ? allNotes.pinned : allNotes.unpinned;
+  note.remove();
+  for (let i = 0; i < wheretolookup.length; i++) {
+    if (wheretolookup[i]._id === dataId) {
+      wheretolookup.splice(i, 1);
+      break;
+    }
+  }
+  await deleteOneNote(dataId);
+};
+
 const bindNote = async (note) => {
   note.addEventListener('click', async (e) => {
     const dataId = note.getAttribute('data-id');
     const isPinned = note.getAttribute('data-note-isPinned');
-    let wheretolookup = isPinned === 'true' ? allNotes.pinned : allNotes.unpinned;
+    const wheretolookup = isPinned === 'true' ? allNotes.pinned : allNotes.unpinned;
     const deleteBtn = note.querySelector('.note__option_delete');
     if (e.target === deleteBtn || e.target.closest('button') === deleteBtn) {
-      note.remove();
-      for (let i = 0; i < wheretolookup.length; i++) {
-        if (wheretolookup[i]._id === dataId) {
-          wheretolookup.splice(i, 1);
-          break;
-        }
-      }
-      await deleteOneNote(dataId);
+      deleteNote(note);
     } else {
       activatePopup();
       isReading = true;
