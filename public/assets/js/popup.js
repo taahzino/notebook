@@ -135,7 +135,7 @@ const bindNote = async (note) => {
       for (let i = 0; i < allNotes.length; i++) {
         if (allNotes[i]._id === dataId) {
           allNotes.splice(i, 1);
-          return;
+          break;
         }
       }
       await deleteOneNote(dataId);
