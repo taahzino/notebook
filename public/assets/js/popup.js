@@ -110,13 +110,13 @@ const deactivatePopup = async () => {
                 </button>
             </div>
         `;
-        unpinnedDiv.insertBefore(newNoteHTML, unpinnedDiv.childNodes[0]);
-        bindNote(newNoteHTML);
         allNotes.unpinned.push({
           _id: tempId,
           title: newTitle,
           content: newContent,
         });
+        unpinnedDiv.insertBefore(newNoteHTML, unpinnedDiv.childNodes[0]);
+        bindNote(newNoteHTML);
         const newNote = await createOneNote({
           title: newTitle,
           content: newContent,
@@ -136,8 +136,9 @@ const deactivatePopup = async () => {
 const adjustNewNote = (tempId, newId, newNote) => {
   for (let i = 0; i < allNotes.unpinned.length; i++) {
     if (allNotes.unpinned[i]._id === tempId) {
-      allNotes.unpinned.splice(i, 1)
-      allNotes.unpinned.push(newNote);
+      allNotes.unpinned[i] = newNote;
+      // allNotes.unpinned.splice(i, 1)
+      // allNotes.unpinned.push(newNote);
       break;
     }
   }
