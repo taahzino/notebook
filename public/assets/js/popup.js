@@ -113,6 +113,7 @@ const deactivatePopup = async () => {
         allNotes.unpinned.push({
           _id: tempId,
           title: newTitle,
+          pinned: false,
           content: newContent,
         });
         unpinnedDiv.insertBefore(newNoteHTML, unpinnedDiv.childNodes[0]);
