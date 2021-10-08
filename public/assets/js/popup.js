@@ -49,25 +49,24 @@ const deactivatePopup = async () => {
       const isPinned = popup.getAttribute('data-note-isPinned');
       let wheretolookup = isPinned === 'true' ? allNotes.pinned : allNotes.unpinned;
       if (newTitle !== tempTitle || newContent !== tempContent) {
-        allNotesDOM.forEach((note) => {
-          if (note.getAttribute('data-id') === popup.getAttribute('data-id')) {
-            note.querySelector('.note__title').innerText = newTitle;
-            note.querySelector('.note__summery').innerText = newContent.substr(0, 180) + '...';
-            if (isPinned.toString === 'true') {
-              pinnedDiv.insertBefore(note, pinnedDiv.childNodes[0]);
+        for (let i = 0; i < allNotesDOM.length; i++) {
+          if (allNotesDOM[i].getAttribute('data-id') === popup.getAttribute('data-id')) {
+            allNotesDOM[i].querySelector('.note__title').innerText = newTitle;
+            allNotesDOM[i].querySelector('.note__summery').innerText = newContent.substr(0, 180) + '...';
+            if (JSON.parse(isPinned) === true) {
+              pinnedDiv.insertBefore(allNotesDOM[i], pinnedDiv.childNodes[0]);
             } else {
-              unpinnedDiv.insertBefore(note, unpinnedDiv.childNodes[0]);
+              unpinnedDiv.insertBefore(allNotesDOM[i], unpinnedDiv.childNodes[0]);
             }
-            return;
           }
-        });
-        wheretolookup.forEach((note) => {
-          if (note._id === popup.getAttribute('data-id')) {
-            note.title = newTitle;
-            note.value = newContent;
-            return;
+        }
+        for (let i = 0; i < wheretolookup.length; i++) {
+          if (wheretolookup[i]._id === popup.getAttribute('data-id')) {
+            wheretolookup[i].title = newTitle;
+            wheretolookup[i].content = newContent;
+            break;
           }
-        });
+        }
         await updateOneNote(popup.getAttribute('data-id'), {
           title: newTitle,
           content: newContent,
@@ -240,7 +239,7 @@ const bindNote = async (note) => {
       wheretolookup.forEach((noteData) => {
         if (noteData._id === dataId) {
           popup.setAttribute('data-id', noteData._id);
-          popup.setAttribute('data-note-pinned', `${noteData.pinned.toString() === 'true' ? 'true' : 'false'}`);
+          popup.setAttribute('data-note-ispinned', `${JSON.parse(noteData.pinned)}`);
           title.value = noteData.title !== 'false' ? noteData.title : '';
           content.value = noteData.content;
           tempTitle = noteData.title !== 'false' ? noteData.title : '';
