@@ -12,6 +12,9 @@ let pinnedDiv = document.querySelector('.notes__grid.pinned__notes');
 let unpinnedDiv = document.querySelector('.notes__grid.unpinned__notes');
 const contentSection = document.querySelector('.container .content');
 
+const contentLength = 180;
+const titleLength = 40;
+
 var isReading = false;
 var tempTitle;
 var tempContent;
@@ -51,8 +54,8 @@ const deactivatePopup = async () => {
       if (newTitle !== tempTitle || newContent !== tempContent) {
         for (let i = 0; i < allNotesDOM.length; i++) {
           if (allNotesDOM[i].getAttribute('data-id') === popup.getAttribute('data-id')) {
-            allNotesDOM[i].querySelector('.note__title').innerText = newTitle;
-            allNotesDOM[i].querySelector('.note__summery').innerText = newContent.substr(0, 180) + '...';
+            allNotesDOM[i].querySelector('.note__title').innerText = newTitle.substr(0, titleLength);
+            allNotesDOM[i].querySelector('.note__summery').innerText = newContent.length > contentLength ?  newContent.substr(0, contentLength) + '...' : newContent;
             if (JSON.parse(isPinned) === true) {
               pinnedDiv.insertBefore(allNotesDOM[i], pinnedDiv.childNodes[0]);
             } else {
@@ -95,9 +98,9 @@ const deactivatePopup = async () => {
         newNoteHTML.setAttribute('data-id', tempId);
         newNoteHTML.setAttribute('data-note-isPinned', 'false');
         newNoteHTML.innerHTML = `
-            <h3 class="note__title">${newTitle !== 'false' ? newTitle : ''}</h3>
+            <h3 class="note__title">${newTitle !== 'false' ? newTitle.substr(0, titleLength) : ''}</h3>
             <div name="note__summery" class="note__summery">
-            ${newContent !== 'false' ? newContent.substr(0, 180) : ''}...
+            ${newContent !== 'false' ? newContent.length > contentLength ? newContent.substr(0, contentLength) + '...' : newContent : ''}
             </div>
             <div class="note__options">
                 <button class="note__option_pin">

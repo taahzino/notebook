@@ -76,10 +76,10 @@
               <div class="note" data-id="<%= note._id %>"
                 data-note-isPinned="<%= note.pinned === true || note.pinned === 'true' ? 'true' : 'false' %>">
                 <h3 class="note__title">
-                  <%= note.title !=='false' ? note.title : '' %>
+                  <%= note.title.length> 40 ? note.title.substr(0, 40) + '...' : note.title %>
                 </h3>
                 <div name="note__summery" class="note__summery">
-                  <%= note.content.substr(0, 180) %>...
+                  <%= note.content.length> 180 ? note.content.substr(0, 180) + '...' : note.content %>
                 </div>
 
                 <div class="note__options">
@@ -105,10 +105,10 @@
                     <div class="note" data-id="<%= note._id %>"
                       data-note-isPinned="<%= note.pinned === true || note.pinned === 'true' ? 'true' : 'false' %>">
                       <h3 class="note__title">
-                        <%= note.title !=='false' ? note.title : '' %>
+                        <%= note.title.length> 40 ? note.title.substr(0, 40) + '...' : note.title %>
                       </h3>
                       <div name="note__summery" class="note__summery">
-                        <%= note.content.substr(0, 180) %>...
+                        <%= note.content.length> 180 ? note.content.substr(0, 180) + '...' : note.content %>
                       </div>
 
                       <div class="note__options">
@@ -130,7 +130,7 @@
   </div>
 
   <div class="new_note popup">
-    <input type="text" id="title" placeholder="Title" />
+    <input type="text" id="title" placeholder="Title" maxlength="40" />
     <textarea id="content" placeholder="Take a note..."></textarea>
 
     <div class="note__options">
