@@ -41,22 +41,31 @@ const activatePopup = () => {
 };
 
 const deactivatePopup = async () => {
+  const dataId = popup.getAttribute('data-id');
+  const isPinned = popup.getAttribute('data-note-isPinned');
+
+  popup.setAttribute('data-id', '');
+  popup.setAttribute('data-note-isPinned', '');
+
   body.classList.remove("inactive");
   popup.classList.remove("active");
+
   const allNotesDOM = document.querySelectorAll('.note');
+
   let newTitle = title.value;
   let newContent = content.value;
+
   title.value = '';
   content.value = '';
+
   if (isReading) {
-    if (popup.getAttribute('data-id').length === 24) {
-      const isPinned = popup.getAttribute('data-note-isPinned');
+    if (dataId.length === 24) {
       let wheretolookup = isPinned === 'true' ? allNotes.pinned : allNotes.unpinned;
       if (newTitle.trim() === '' && newContent.trim() === '') {
         deleteThisNote(selectedNote);
       } else if (newTitle !== tempTitle || newContent !== tempContent) {
         for (let i = 0; i < allNotesDOM.length; i++) {
-          if (allNotesDOM[i].getAttribute('data-id') === popup.getAttribute('data-id')) {
+          if (allNotesDOM[i].getAttribute('data-id') === dataId) {
             allNotesDOM[i].querySelector('.note__title').innerText = newTitle.substr(0, titleLength);
             allNotesDOM[i].querySelector('.note__summery').innerText = newContent.length > contentLength ?  newContent.substr(0, contentLength) + '...' : newContent;
             if (JSON.parse(isPinned) === true) {
@@ -67,13 +76,13 @@ const deactivatePopup = async () => {
           }
         }
         for (let i = 0; i < wheretolookup.length; i++) {
-          if (wheretolookup[i]._id === popup.getAttribute('data-id')) {
+          if (wheretolookup[i]._id === dataId) {
             wheretolookup[i].title = newTitle;
             wheretolookup[i].content = newContent;
             break;
           }
         }
-        await updateOneNote(popup.getAttribute('data-id'), {
+        await updateOneNote(dataId, {
           title: newTitle,
           content: newContent,
         });
@@ -124,11 +133,12 @@ const deactivatePopup = async () => {
   tempContent = undefined;
   newTitle = undefined;
   newContent = undefined;
-  popup.setAttribute('data-id', '');
-  popup.setAttribute('data-note-isPinned', '');
 };
 
 const adjustNewNote = (tempId, newId, newNote) => {
+  if (popup.getAttribute('data-id') === tempId) {
+    popup.setAttribute('data-id', newId);
+  }
   for (let i = 0; i < allNotes.unpinned.length; i++) {
     if (allNotes.unpinned[i]._id === tempId) {
       allNotes.unpinned[i] = {...newNote, tempId};
