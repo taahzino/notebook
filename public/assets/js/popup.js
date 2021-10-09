@@ -1,8 +1,8 @@
-import { createOneNote } from "./notes/createOne.js";
-import { deleteOneNote } from "./notes/deleteOne.js";
-import { fetchAllNotes } from "./notes/fetchNotes.js";
-import { pinOneNote } from "./notes/pinOne.js";
-import { updateOneNote } from "./notes/updateOne.js";
+import { createOneNote } from "./notes/ajax_requests/createOne.js";
+import { deleteOneNote } from "./notes/ajax_requests/deleteOne.js";
+import { fetchAllNotes } from "./notes/ajax_requests/fetchNotes.js";
+import { pinOneNote } from "./notes/ajax_requests/pinOne.js";
+import { updateOneNote } from "./notes/ajax_requests/updateOne.js";
 
 const body = document.querySelector("body");
 const popup = document.querySelector(".popup");
@@ -84,7 +84,7 @@ const deactivatePopup = async () => {
       if (newTitle.length > 0 || newContent.length > 0) {
         const newNoteHTML = document.createElement('div');
         newNoteHTML.classList.add('note');
-        let tempId = `temp${Math.random().toString().split(".").join('')}`;
+        let tempId = `temp_${Math.random().toString().split(".").join('')}`;
         newNoteHTML.setAttribute('data-id', tempId);
         newNoteHTML.setAttribute('data-note-isPinned', 'false');
         newNoteHTML.innerHTML = `
@@ -131,7 +131,7 @@ const deactivatePopup = async () => {
 const adjustNewNote = (tempId, newId, newNote) => {
   for (let i = 0; i < allNotes.unpinned.length; i++) {
     if (allNotes.unpinned[i]._id === tempId) {
-      allNotes.unpinned[i] = newNote;
+      allNotes.unpinned[i] = {...newNote, tempId};
       break;
     }
   }
@@ -230,18 +230,17 @@ const bindNote = async (note) => {
     } else {
       activatePopup();
       isReading = true;
-      wheretolookup.forEach((noteData) => {
-        if (noteData._id === dataId) {
-          popup.setAttribute('data-id', noteData._id);
-          popup.setAttribute('data-note-ispinned', `${JSON.parse(noteData.pinned)}`);
-          title.value = noteData.title !== 'false' ? noteData.title : '';
-          content.value = noteData.content;
-          tempTitle = noteData.title !== 'false' ? noteData.title : '';
-          tempContent = noteData.content;
-
-          return;
+      for (let i = 0; i < wheretolookup.length; i++) {
+        if (wheretolookup[i]._id === dataId || wheretolookup[i].tempId) {
+          popup.setAttribute('data-id', wheretolookup[i]._id);
+          popup.setAttribute('data-note-ispinned', `${JSON.parse(wheretolookup[i].pinned)}`);
+          title.value = wheretolookup[i].title !== 'false' ? wheretolookup[i].title : '';
+          content.value = wheretolookup[i].content !== 'false' ? wheretolookup[i].content : '';
+          tempTitle = wheretolookup[i].title !== 'false' ? wheretolookup[i].title : '';
+          tempContent = wheretolookup[i].content !== 'false' ? wheretolookup[i].content : '';
+          break;
         }
-      });
+      }
     }
   });
 }
