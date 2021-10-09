@@ -139,12 +139,12 @@ const adjustNewNote = (tempId, newId, newNote) => {
     }
   }
   const unpinnedNotes = document.querySelectorAll('.notes__grid.unpinned__notes .note');
-  unpinnedNotes.forEach((un) => {
-    if (un.getAttribute('data-id') === tempId) {
-      un.setAttribute('data-id', newId);
-      return;
+  for (let i = 0; i < unpinnedNotes.length; i++) {
+    if (unpinnedNotes[i].getAttribute('data-id') === tempId) {
+      unpinnedNotes[i].setAttribute('data-id', newId);
+      break;
     }
-  });
+  }
 };
 
 const deleteThisNote = async (note) => {
