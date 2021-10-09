@@ -76,10 +76,13 @@
               <div class="note" data-id="<%= note._id %>"
                 data-note-isPinned="<%= note.pinned === true || note.pinned === 'true' ? 'true' : 'false' %>">
                 <h3 class="note__title">
-                  <%= note.title.length> 40 ? note.title.substr(0, 40) + '...' : note.title %>
+                  <%= note.title.length> 0 && note.title !== 'false' && note.title !== false? note.title.length >
+                    40 ? note.title.substr(0, 40) + '...' :
+                    note.title : '' %>
                 </h3>
                 <div name="note__summery" class="note__summery">
-                  <%= note.content.length> 180 ? note.content.substr(0, 180) + '...' : note.content %>
+                  <%= note.content.length> 0 && note.content !== 'false' && note.content !== false?
+                    note.content.length> 180 ? note.content.substr(0, 180) + '...' : note.content : '' %>
                 </div>
 
                 <div class="note__options">
@@ -105,10 +108,13 @@
                     <div class="note" data-id="<%= note._id %>"
                       data-note-isPinned="<%= note.pinned === true || note.pinned === 'true' ? 'true' : 'false' %>">
                       <h3 class="note__title">
-                        <%= note.title.length> 40 ? note.title.substr(0, 40) + '...' : note.title %>
+                        <%= note.title.length> 0 && note.title !== 'false' && note.title !== false? note.title.length >
+                          40 ? note.title.substr(0, 40) + '...' :
+                          note.title : '' %>
                       </h3>
                       <div name="note__summery" class="note__summery">
-                        <%= note.content.length> 180 ? note.content.substr(0, 180) + '...' : note.content %>
+                        <%= note.content.length> 0 && note.content !== 'false' && note.content !== false?
+                          note.content.length> 180 ? note.content.substr(0, 180) + '...' : note.content : '' %>
                       </div>
 
                       <div class="note__options">
