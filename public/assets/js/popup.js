@@ -129,9 +129,6 @@ const deactivatePopup = async () => {
 };
 
 const adjustNewNote = (tempId, newId, newNote) => {
-  if (popup.getAttribute('data-id') === tempId) {
-    popup.setAttribute('data-id', newId);
-  }
   for (let i = 0; i < allNotes.unpinned.length; i++) {
     if (allNotes.unpinned[i]._id === tempId) {
       allNotes.unpinned[i] = {...newNote, tempId};
