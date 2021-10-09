@@ -129,6 +129,9 @@ const deactivatePopup = async () => {
 };
 
 const adjustNewNote = (tempId, newId, newNote) => {
+  if (popup.getAttribute('data-id') === tempId) {
+    popup.setAttribute('data-id', newId);
+  }
   for (let i = 0; i < allNotes.unpinned.length; i++) {
     if (allNotes.unpinned[i]._id === tempId) {
       allNotes.unpinned[i] = {...newNote, tempId};
@@ -232,7 +235,7 @@ const bindNote = async (note) => {
       isReading = true;
       for (let i = 0; i < wheretolookup.length; i++) {
         if (wheretolookup[i]._id === dataId || wheretolookup[i].tempId) {
-          popup.setAttribute('data-id', wheretolookup[i]._id);
+          popup.setAttribute('data-id', dataId);
           popup.setAttribute('data-note-ispinned', `${JSON.parse(wheretolookup[i].pinned)}`);
           title.value = wheretolookup[i].title !== 'false' ? wheretolookup[i].title : '';
           content.value = wheretolookup[i].content !== 'false' ? wheretolookup[i].content : '';
