@@ -18,6 +18,7 @@ const titleLength = 40;
 var isReading = false;
 var tempTitle;
 var tempContent;
+var selectedNote;
 var allNotes;
 
 (async () => {
@@ -51,7 +52,9 @@ const deactivatePopup = async () => {
     if (popup.getAttribute('data-id').length === 24) {
       const isPinned = popup.getAttribute('data-note-isPinned');
       let wheretolookup = isPinned === 'true' ? allNotes.pinned : allNotes.unpinned;
-      if (newTitle !== tempTitle || newContent !== tempContent) {
+      if (newTitle.trim() === '' && newContent.trim() === '') {
+        deleteThisNote(selectedNote);
+      } else if (newTitle !== tempTitle || newContent !== tempContent) {
         for (let i = 0; i < allNotesDOM.length; i++) {
           if (allNotesDOM[i].getAttribute('data-id') === popup.getAttribute('data-id')) {
             allNotesDOM[i].querySelector('.note__title').innerText = newTitle.substr(0, titleLength);
@@ -74,21 +77,8 @@ const deactivatePopup = async () => {
           title: newTitle,
           content: newContent,
         });
-      }
-      if (newTitle.trim() === '' && newContent.trim() === '') {
-        for (let i = 0; i < allNotesDOM.length; i++) {
-          if (allNotesDOM[i].getAttribute('data-id') === popup.getAttribute('data-id')) {
-            allNotesDOM[i].remove();
-            break;
-          }
-        }
-        for (let i = 0; i < wheretolookup.length; i++) {
-          if (wheretolookup[i]._id === popup.getAttribute('data-id')) {
-            wheretolookup[i].title = newTitle;
-            wheretolookup[i].value = newContent;
-            wheretolookup.splice(i, 1);
-          }
-        }
+      } else {
+        // nothing
       }
     } else {
       if (newTitle.length > 0 || newContent.length > 0) {
@@ -227,6 +217,7 @@ const pinThisNote = async (note, dataId, isPinned) => {
 
 const bindNote = async (note) => {
   note.addEventListener('click', async (e) => {
+    selectedNote = note;
     const dataId = note.getAttribute('data-id');
     const isPinned = note.getAttribute('data-note-isPinned');
     const wheretolookup = isPinned === 'true' ? allNotes.pinned : allNotes.unpinned;
