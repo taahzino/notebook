@@ -261,12 +261,20 @@ body {
   flex-direction: column;
   opacity: 0;
   pointer-events: none;
-  z-index: 1000;
+  z-index: -1000;
   transition: all 0.3s ease;
+  .note__options {
+    opacity: 0;
+    pointer-events: none;
+  }
   &.active {
     z-index: 1000;
     opacity: 1;
     pointer-events: all;
+    .note__options {
+      opacity: 1;
+      pointer-events: all;
+    }
     textarea,
     input {
       opacity: 1;
