@@ -1,0 +1,36 @@
+<div class="sidebar">
+    <div class="sidebar__header">
+        <a class="item__link">
+            <i class="bx bx-book-reader item__icon"></i>
+            <span class="item__name">Notebook</span>
+        </a>
+    </div>
+    <div class="sidebar__menu">
+        <a href="#" class="item__link <%= activeItem === 'index' ? 'active' : ''%>">
+            <i class="bx bx-home item__icon"></i>
+            <span class="item__name">Home</span>
+        </a>
+        <a href="#" class="item__link createNoteLink">
+            <i class="bx bx-plus-circle item__icon"></i>
+            <span class="item__name">Create</span>
+        </a>
+        <a href="/bookmarks" class="item__link <%= activeItem === 'bookmarks' ? 'active' : ''%>">
+            <i class="bx bx-heart-circle item__icon"></i>
+            <span class="item__name">Bookmarks</span>
+        </a>
+        <a href="#" class="item__link">
+            <i class="bx bx-category item__icon"></i>
+            <span class="item__name">Categories</span>
+        </a>
+        <a href="#" class="item__link">
+            <i class="bx bx-user item__icon"></i>
+            <span class="item__name">Profile</span>
+        </a>
+    </div>
+    <div class="sidebar__footer">
+        <a href="/logout" class="item__link">
+            <i class="bx bx-log-out item__icon"></i>
+            <span class="item__name">Logout</span>
+        </a>
+    </div>
+</div>
