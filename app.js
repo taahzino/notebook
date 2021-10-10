@@ -58,5 +58,6 @@ app.listen(env.PORT, () => {
 
 (() => {
     // eslint-disable-next-line global-require
-    require('./updates/10oct2021')();
+    // [0] require('./updates/10oct2021')();
+    // ** successfully executed [0]
 })();
