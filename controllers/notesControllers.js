@@ -280,7 +280,7 @@ const pinANote = async (req, res) => {
                 {
                     pinned: bool,
                 },
-                { new: true, timestamps: false }
+                { new: true }
             );
             res.status(200).json({
                 result: { note },
