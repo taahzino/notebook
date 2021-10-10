@@ -25,9 +25,10 @@
           <div class="notes__grid bookmarked__notes">
               <% if (result && result.notes && result.notes.bookmarked) {
                 result.notes.bookmarked.forEach((note) => {%>
-                    <div class="note" data-id="<%= note._id %>"
-                        data-note-isPinned="<%= note.pinned === true || note.pinned === 'true' ? 'true' : 'false' %>"
-                        data-note-isBookmarked="<%= note.bookmarked === true || note.bookmarked === 'true' ? 'true' : 'false' %>">
+                  <div class="note" data-id="<%= note._id %>"
+                    data-note-isPinned="<%= note.pinned === true || note.pinned === 'true' ? 'true' : 'false' %>"
+                    data-note-isBookmarked="<%= note.bookmarked === true || note.bookmarked === 'true' ? 'true' : 'false' %>"
+                    data-note-isArchived="<%= note.archived === true || note.archived === 'true' ? 'true' : 'false' %>">
                         <h3 class="note__title">
                           <%= note.title.length> 0 && note.title !== 'false' && note.title !== false? note.title.length >
                             40 ? note.title.substr(0, 40) + '...' :
@@ -47,6 +48,13 @@
                               <i class='bx bx-heart'></i>
                               <%} else {%>
                                 <i class='bx bxs-heart-circle'></i>
+                                <%}%>
+                          </button>
+                          <button class="note__option_archive">
+                            <% if (note.archived !== true) {%>
+                              <i class='bx bx-archive-in'></i>
+                              <%} else {%>
+                                <i class='bx bx-archive-out' ></i>
                                 <%}%>
                           </button>
                           <button class="note__option_delete">
