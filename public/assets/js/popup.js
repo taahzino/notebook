@@ -1,3 +1,4 @@
+import { bookmarkOneNote } from "./notes/ajax_requests/bookmarkOne.js";
 import { createOneNote } from "./notes/ajax_requests/createOne.js";
 import { deleteOneNote } from "./notes/ajax_requests/deleteOne.js";
 import { fetchAllNotes } from "./notes/ajax_requests/fetchNotes.js";
@@ -96,6 +97,7 @@ const deactivatePopup = async () => {
         let tempId = `temp_${Math.random().toString().split(".").join('')}`;
         newNoteHTML.setAttribute('data-id', tempId);
         newNoteHTML.setAttribute('data-note-isPinned', 'false');
+        newNoteHTML.setAttribute('data-note-isBookmarked', 'false');
         newNoteHTML.innerHTML = `
             <h3 class="note__title">${newTitle !== 'false' ? newTitle.substr(0, titleLength) : ''}</h3>
             <div name="note__summery" class="note__summery">
@@ -225,18 +227,29 @@ const pinThisNote = async (note, dataId, isPinned) => {
   bool = undefined;
 };
 
+const bookmarkThisNote = async (note, isBookmarked, dataId) => {
+  note.querySelector('.note__option_heart i').setAttribute('class', 'bx bxs-heart-circle');
+  let bool = !JSON.parse(isBookmarked);
+  await bookmarkOneNote(dataId, bool);
+  bool = undefined;
+};
+
 const bindNote = async (note) => {
   note.addEventListener('click', async (e) => {
     selectedNote = note;
     const dataId = note.getAttribute('data-id');
     const isPinned = note.getAttribute('data-note-isPinned');
+    const isBookmarked = note.getAttribute('data-note-isBookmarked');
     const wheretolookup = isPinned === 'true' ? allNotes.pinned : allNotes.unpinned;
     const deleteBtn = note.querySelector('.note__option_delete');
     const pinBtn = note.querySelector('.note__option_pin');
+    const bookmarkBtn = note.querySelector('.note__option_heart');
     if (e.target === deleteBtn || e.target.closest('button') === deleteBtn) {
       deleteThisNote(note);
     } else if (e.target === pinBtn || e.target.closest('button') === pinBtn) {
       pinThisNote(note, dataId, isPinned);
+    } else if (e.target === bookmarkBtn || e.target.closest('button') === bookmarkBtn) {
+      bookmarkThisNote(note, isBookmarked, dataId);
     } else {
       activatePopup();
       isReading = true;
