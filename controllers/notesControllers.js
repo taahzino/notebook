@@ -90,10 +90,12 @@ const getAllNotes = (req, res, next) => {
                     const pinned = [];
                     const unpinned = [];
                     allNotes.forEach((note) => {
-                        if (note.pinned === true) {
-                            pinned.push(note);
-                        } else {
-                            unpinned.push(note);
+                        if (!note.archived) {
+                            if (note.pinned === true) {
+                                pinned.push(note);
+                            } else {
+                                unpinned.push(note);
+                            }
                         }
                     });
                     res.locals.result = {
@@ -130,10 +132,12 @@ const getAllNotes = (req, res, next) => {
                     const pinned = [];
                     const unpinned = [];
                     allNotes.forEach((note) => {
-                        if (note.pinned === true) {
-                            pinned.push(note);
-                        } else {
-                            unpinned.push(note);
+                        if (!note.archived) {
+                            if (note.pinned === true) {
+                                pinned.push(note);
+                            } else {
+                                unpinned.push(note);
+                            }
                         }
                     });
                     res.locals.result = {
@@ -404,7 +408,7 @@ const getBookmarkedNotes = (req, res, next) => {
                     const allNotes = users[0].notes;
                     const bookmarked = [];
                     allNotes.forEach((note) => {
-                        if (note.bookmarked === true) {
+                        if (!note.archived && note.bookmarked) {
                             bookmarked.push(note);
                         }
                     });
@@ -441,7 +445,7 @@ const getBookmarkedNotes = (req, res, next) => {
                     const allNotes = users[0].notes;
                     const bookmarked = [];
                     allNotes.forEach((note) => {
-                        if (note.bookmarked === true) {
+                        if (!note.archived && note.bookmarked) {
                             bookmarked.push(note);
                         }
                     });
