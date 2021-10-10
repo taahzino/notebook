@@ -229,6 +229,7 @@ const pinThisNote = async (note, dataId, isPinned) => {
 
 const bookmarkThisNote = async (note, isBookmarked, dataId) => {
   let bool = !JSON.parse(isBookmarked);
+  note.setAttribute('data-note-isBookmarked', bool);
   if (bool) {
     note.querySelector('.note__option_heart i').setAttribute('class', 'bx bxs-heart-circle');
   } else {
