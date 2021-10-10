@@ -228,8 +228,12 @@ const pinThisNote = async (note, dataId, isPinned) => {
 };
 
 const bookmarkThisNote = async (note, isBookmarked, dataId) => {
-  note.querySelector('.note__option_heart i').setAttribute('class', 'bx bxs-heart-circle');
   let bool = !JSON.parse(isBookmarked);
+  if (bool) {
+    note.querySelector('.note__option_heart i').setAttribute('class', 'bx bxs-heart-circle');
+  } else {
+    note.querySelector('.note__option_heart i').setAttribute('class', 'bx bx-heart');
+  }
   await bookmarkOneNote(dataId, bool);
   bool = undefined;
 };
