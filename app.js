@@ -55,3 +55,8 @@ app.listen(env.PORT, () => {
     console.log(`Server is running in ${env.ENVIRONMENT} mode on PORT ${env.PORT}`);
     console.log(`Go: ${env.APP_URL}`);
 });
+
+(() => {
+    // eslint-disable-next-line global-require
+    require('./updates/10oct2021')();
+})();
