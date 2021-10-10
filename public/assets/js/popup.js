@@ -108,7 +108,7 @@ const deactivatePopup = async () => {
                     <i class="bx bx-pin"></i>
                 </button>
                 <button class="note__option_heart">
-                    <i class="bx bx-heart-circle"></i>
+                    <i class='bx bx-heart'></i>
                 </button>
                 <button class="note__option_delete">
                     <i class="bx bx-trash"></i>
