@@ -19,6 +19,7 @@ const {
     deleteANote,
     deleteAllNotes,
     pinANote,
+    bookmarkANote,
 } = require('../../controllers/notesControllers');
 
 // Create express router
@@ -44,6 +45,9 @@ notesRouter.delete('/:id', checkLogin, checkAccess, deleteANote);
 
 // Pin a note
 notesRouter.put('/pin/:bool/:id/', checkLogin, checkAccess, pinANote);
+
+// Bookmark a note
+notesRouter.put('/bookmark/:bool/:id/', checkLogin, checkAccess, bookmarkANote);
 
 // Export the router object
 module.exports = notesRouter;
