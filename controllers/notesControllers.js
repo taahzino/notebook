@@ -280,7 +280,7 @@ const pinANote = async (req, res) => {
                 {
                     pinned: bool,
                 },
-                { new: true }
+                { new: true, timestamps: false }
             );
             res.status(200).json({
                 result: { note },
@@ -308,12 +308,12 @@ const bookmarkANote = async (req, res) => {
     const bool = req.params.bool === 'true';
     if (id) {
         try {
-            const note = await NotesModel.findByIdAndUpdate(
-                id,
+            const note = await NotesModel.findOneAndUpdate(
+                { _id: id },
                 {
                     bookmarked: bool,
                 },
-                { new: true }
+                { new: true, timestamps: false }
             );
             res.status(200).json({
                 result: { note },
