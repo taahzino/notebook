@@ -20,6 +20,7 @@ const {
     deleteAllNotes,
     pinANote,
     bookmarkANote,
+    getAllBookmarkedNotes,
 } = require('../../controllers/notesControllers');
 
 // Create express router
@@ -27,6 +28,9 @@ const notesRouter = express.Router();
 
 // Get all notes
 notesRouter.get('/', checkLogin, getAllNotes, serveNotes);
+
+// Get all bookmarked notes
+notesRouter.get('/bookmarked', checkLogin, getAllBookmarkedNotes, serveNotes);
 
 // Get a note
 notesRouter.get('/:id', checkLogin, checkAccess, getANote);

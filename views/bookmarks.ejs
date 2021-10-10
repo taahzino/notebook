@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Home - Notebook</title>
+  <link rel="shortcut icon" href="assets/images/logo.png">
+  <meta property="og:image" content="assets/images/thumbnail.png" />
+  <meta name="keywords" content="Notebook, tahsin, ahmed, tushar, tahsin ahmed tushar">
+  <meta name="description" content="Capture your thoughts">
+
+  <link rel="stylesheet" href="assets/css/main.css" />
+  <link href="https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css" rel="stylesheet" />
+</head>
+
+<body class="">
+  <div class="container">
+    <%- include('./partials/sidebar.ejs'); %>
+      <div class="content">
+        <%- include('./partials/searchBox.ejs'); %>
+          <h2 class="page__title">Bookmarks</h2>
+          <div class="notes__grid bookmarked__notes">
+              <% if (result && result.notes && result.notes.bookmarked) {
+                result.notes.bookmarked.forEach((note) => {%>
+                    <div class="note" data-id="<%= note._id %>"
+                        data-note-isPinned="<%= note.pinned === true || note.pinned === 'true' ? 'true' : 'false' %>"
+                        data-note-isBookmarked="<%= note.bookmarked === true || note.bookmarked === 'true' ? 'true' : 'false' %>">
+                        <h3 class="note__title">
+                          <%= note.title.length> 0 && note.title !== 'false' && note.title !== false? note.title.length >
+                            40 ? note.title.substr(0, 40) + '...' :
+                            note.title : '' %>
+                        </h3>
+                        <div name="note__summery" class="note__summery">
+                          <%= note.content.length> 0 && note.content !== 'false' && note.content !== false?
+                            note.content.length> 180 ? note.content.substr(0, 180) + '...' : note.content : '' %>
+                        </div>
+    
+                        <div class="note__options">
+                          <button class="note__option_pin">
+                            <i class="bx bx<%= note.pinned === true ? 's' : ''%>-pin"></i>
+                          </button>
+                          <button class="note__option_heart">
+                            <% if (note.bookmarked !==true) {%>
+                              <i class='bx bx-heart'></i>
+                              <%} else {%>
+                                <i class='bx bxs-heart-circle'></i>
+                                <%}%>
+                          </button>
+                          <button class="note__option_delete">
+                            <i class="bx bx-trash"></i>
+                          </button>
+                        </div>
+                      </div>
+                <%});
+              }%>
+          </div>
+      </div>
+  </div>
+
+  <%- include('./partials/newNotePopup.ejs'); %>
+    <script type="module" src="/assets/js/notes/index.js"></script>
+    <script type="module">
+        const notes = document.querySelectorAll('.note');
+        notes.forEach((note) => {
+            note.addEventListener('click', (e) => {
+                const bookmarkBtn = note.querySelector('.note__option_heart');
+                if (e.target === bookmarkBtn || e.target.closest('button') === bookmarkBtn) {
+                    note.remove();
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

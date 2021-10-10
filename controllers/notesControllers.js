@@ -335,6 +335,79 @@ const bookmarkANote = async (req, res) => {
     }
 };
 
+const getAllBookmarkedNotes = (req, res, next) => {
+    if (res.locals.user.userType === 'generalUser') {
+        GeneralUser.find({
+            _id: res.locals.user._id,
+        })
+            .populate({
+                path: 'notes',
+                options: {
+                    sort: { updatedAt: -1 },
+                },
+            })
+            .sort({})
+            .select({
+                __v: 0,
+                password: 0,
+            })
+            .exec((err, users) => {
+                if (err) {
+                    console.log(err);
+                    res.status(500).json({
+                        errors: {
+                            common: { msg: 'Internal server error!' },
+                        },
+                    });
+                } else {
+                    const allNotes = users[0].notes;
+                    const bookmarked = [];
+                    allNotes.forEach((note) => {
+                        if (note.bookmarked === true) {
+                            bookmarked.push(note);
+                        }
+                    });
+                    res.locals.result = {
+                        notes: { bookmarked },
+                    };
+                    next();
+                }
+            });
+    } else {
+        GoogleUser.find({
+            _id: res.locals.user._id,
+        })
+            .populate({
+                path: 'notes',
+                options: {
+                    sort: { updatedAt: -1 },
+                },
+            })
+            .sort({})
+            .select({
+                __v: 0,
+                password: 0,
+            })
+            .exec((err, users) => {
+                if (err) {
+                    console.log(err);
+                    res.status(500).json({
+                        errors: {
+                            common: { msg: 'Internal server error!' },
+                        },
+                    });
+                } else {
+                    res.status(200).json({
+                        message: 'success',
+                        result: {
+                            notes: users[0].notes,
+                        },
+                    });
+                }
+            });
+    }
+};
+
 module.exports = {
     saveNote,
     getANote,
@@ -344,4 +417,5 @@ module.exports = {
     deleteAllNotes,
     pinANote,
     bookmarkANote,
+    getAllBookmarkedNotes,
 };
