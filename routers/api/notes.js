@@ -20,7 +20,9 @@ const {
     deleteAllNotes,
     pinANote,
     bookmarkANote,
-    getAllBookmarkedNotes,
+    getBookmarkedNotes,
+    archiveANote,
+    getArchivedNotes,
 } = require('../../controllers/notesControllers');
 
 // Create express router
@@ -29,8 +31,11 @@ const notesRouter = express.Router();
 // Get all notes
 notesRouter.get('/', checkLogin, getAllNotes, serveNotes);
 
+// Get all archived notes
+notesRouter.get('/archived', checkLogin, getArchivedNotes, serveNotes);
+
 // Get all bookmarked notes
-notesRouter.get('/bookmarked', checkLogin, getAllBookmarkedNotes, serveNotes);
+notesRouter.get('/bookmarked', checkLogin, getBookmarkedNotes, serveNotes);
 
 // Get a note
 notesRouter.get('/:id', checkLogin, checkAccess, getANote);
@@ -52,6 +57,9 @@ notesRouter.put('/pin/:bool/:id/', checkLogin, checkAccess, pinANote);
 
 // Bookmark a note
 notesRouter.put('/bookmark/:bool/:id/', checkLogin, checkAccess, bookmarkANote);
+
+// Bookmark a note
+notesRouter.put('/archive/:bool/:id/', checkLogin, checkAccess, archiveANote);
 
 // Export the router object
 module.exports = notesRouter;
