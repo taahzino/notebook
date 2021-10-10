@@ -1,3 +1,4 @@
+import { archiveOneNote } from "./notes/ajax_requests/archiveOne.js";
 import { bookmarkOneNote } from "./notes/ajax_requests/bookmarkOne.js";
 import { createOneNote } from "./notes/ajax_requests/createOne.js";
 import { deleteOneNote } from "./notes/ajax_requests/deleteOne.js";
@@ -106,6 +107,9 @@ const deactivatePopup = async () => {
             <div class="note__options">
                 <button class="note__option_pin">
                     <i class="bx bx-pin"></i>
+                </button>
+                <button class="note__option_archive">
+                    <i class='bx bx-archive-in'></i>
                 </button>
                 <button class="note__option_heart">
                     <i class='bx bx-heart'></i>
@@ -239,22 +243,34 @@ const bookmarkThisNote = async (note, isBookmarked, dataId) => {
   bool = undefined;
 };
 
+const archiveThisNote = async (note, isArchived, dataId) => {
+  let bool = !JSON.parse(isArchived);
+  note.setAttribute('data-note-isArchived', bool);
+  note.remove();
+  await archiveOneNote(dataId, bool);
+  bool = undefined;
+};
+
 const bindNote = async (note) => {
   note.addEventListener('click', async (e) => {
     selectedNote = note;
     const dataId = note.getAttribute('data-id');
     const isPinned = note.getAttribute('data-note-isPinned');
     const isBookmarked = note.getAttribute('data-note-isBookmarked');
+    const isArchived = note.getAttribute('data-note-isArchived');
     const wheretolookup = isPinned === 'true' ? allNotes.pinned : allNotes.unpinned;
     const deleteBtn = note.querySelector('.note__option_delete');
     const pinBtn = note.querySelector('.note__option_pin');
     const bookmarkBtn = note.querySelector('.note__option_heart');
+    const archiveBtn = note.querySelector('.note__option_archive');
     if (e.target === deleteBtn || e.target.closest('button') === deleteBtn) {
       deleteThisNote(note);
     } else if (e.target === pinBtn || e.target.closest('button') === pinBtn) {
       pinThisNote(note, dataId, isPinned);
     } else if (e.target === bookmarkBtn || e.target.closest('button') === bookmarkBtn) {
       bookmarkThisNote(note, isBookmarked, dataId);
+    } else if (e.target === archiveBtn || e.target.closest('button') === archiveBtn) {
+      archiveThisNote(note, isArchived, dataId);
     } else {
       activatePopup();
       isReading = true;
