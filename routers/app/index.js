@@ -8,7 +8,11 @@ const isLoggedIn = require('../../middlewares/auth/isLoggedIn');
 const { doLogout } = require('../../controllers/loginControllers');
 
 // Controllers
-const { getAllNotes, getBookmarkedNotes } = require('../../controllers/notesControllers');
+const {
+    getAllNotes,
+    getBookmarkedNotes,
+    getArchivedNotes,
+} = require('../../controllers/notesControllers');
 
 // Create express router
 const appRouter = express.Router();
@@ -21,6 +25,10 @@ appRouter.get('/', decorateHTML, checkLogin, getAllNotes, (req, res) => {
 appRouter.get('/bookmarks', decorateHTML, checkLogin, getBookmarkedNotes, (req, res) => {
     res.locals.activeItem = 'bookmarks';
     res.render('bookmarks');
+});
+appRouter.get('/archives', decorateHTML, checkLogin, getArchivedNotes, (req, res) => {
+    res.locals.activeItem = 'archives';
+    res.render('archives');
 });
 appRouter.get('/login', decorateHTML, isLoggedIn, (req, res) => {
     res.render('login');
