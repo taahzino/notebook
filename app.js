@@ -11,7 +11,7 @@ const cors = require('cors');
 // Environment variables
 dotenv.config({ path: './config/config.env' });
 const { env } = process;
-const MONGO_URI = env.ENVIRONMENT === 'production' ? env.MONGO_REMOTE : env.MONGO_LOCAL;
+const { MONGO_URI } = env;
 
 // Configurations
 require('./config/passport')(passport);
