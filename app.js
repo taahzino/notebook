@@ -6,6 +6,7 @@ const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const passport = require('passport');
 const MongoStore = require('connect-mongo');
+const cors = require('cors');
 
 // Environment variables
 dotenv.config({ path: './config/config.env' });
@@ -18,6 +19,13 @@ require('./config/database')(mongoose, MONGO_URI);
 
 // Create the express app
 const app = express();
+
+// Cors
+app.use(
+    cors({
+        origin: env.APP_URL,
+    })
+);
 
 // Setup view engine
 app.set('view engine', 'ejs');
