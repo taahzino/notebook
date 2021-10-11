@@ -12,10 +12,12 @@ const pinThisNote = async (note, dataId, isPinned, allNotes, pinnedDiv, unpinned
   note.setAttribute("data-note-isPinned", `${bool}`);
   // change the icon
   if (bool) {
-    note
+    note.querySelector(".note__option_pin").setAttribute('title', 'Unpin')
+    note  
       .querySelector(".note__option_pin i")
       .setAttribute("class", "bx bxs-pin");
   } else {
+    note.querySelector(".note__option_pin").setAttribute('title', 'Pin');
     note
       .querySelector(".note__option_pin i")
       .setAttribute("class", "bx bx-pin");
