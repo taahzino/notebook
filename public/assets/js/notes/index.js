@@ -2,8 +2,6 @@ import {
   activatePopup, bindNote, deactivatePopup
 } from "../popup.js";
 
-// import { fetchAllNotes } from "./fetchNotes.js";
-
 const body = document.querySelector("body");
 const createNoteLink = document.querySelector(".createNoteLink");
 const createNoteLinkIcon = createNoteLink.querySelector("i");
