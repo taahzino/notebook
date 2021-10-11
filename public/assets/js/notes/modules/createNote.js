@@ -11,10 +11,10 @@ const createNewNote = async (
   allNotes,
   unpinnedDiv
 ) => {
+  let tempId = `temp_${Math.random().toString().split(".").join("")}`;
   if (window.location.pathname === "/") {
     const newNoteHTML = document.createElement("div");
     newNoteHTML.classList.add("note");
-    let tempId = `temp_${Math.random().toString().split(".").join("")}`;
     newNoteHTML.setAttribute("data-id", tempId);
     newNoteHTML.setAttribute("data-note-isPinned", "false");
     newNoteHTML.setAttribute("data-note-isBookmarked", "false");
@@ -32,16 +32,16 @@ const createNewNote = async (
             }
             </div>
             <div class="note__options">
-                <button class="note__option_pin">
+                <button class="note__option_pin" title="Pin this note">
                     <i class="bx bx-pin"></i>
                 </button>
-                <button class="note__option_archive">
+                <button class="note__option_archive" title="Move to archive">
                     <i class='bx bx-archive-in'></i>
                 </button>
-                <button class="note__option_heart">
+                <button class="note__option_heart" title="Add bookmark">
                     <i class='bx bx-heart'></i>
                 </button>
-                <button class="note__option_delete">
+                <button class="note__option_delete" title="Delete">
                     <i class="bx bx-trash"></i>
                 </button>
             </div>
@@ -61,8 +61,9 @@ const createNewNote = async (
   });
   if (window.location.pathname === "/") {
     adjustNewNote(tempId, newNote._id, newNote, allNotes, popup);
+  } else {
+    window.location.href = '/';
   }
-  window.location.href = '/';
 };
 
 export { createNewNote };
