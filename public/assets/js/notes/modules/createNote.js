@@ -35,11 +35,11 @@ const createNewNote = async (
                 <button class="note__option_pin" title="Pin this note">
                     <i class="bx bx-pin"></i>
                 </button>
-                <button class="note__option_archive" title="Move to archive">
-                    <i class='bx bx-archive-in'></i>
-                </button>
                 <button class="note__option_heart" title="Add bookmark">
                     <i class='bx bx-heart'></i>
+                </button>
+                <button class="note__option_archive" title="Move to archive">
+                    <i class='bx bx-archive-in'></i>
                 </button>
                 <button class="note__option_delete" title="Delete">
                     <i class="bx bx-trash"></i>
