@@ -1,4 +1,4 @@
-import { archiveOneNote } from "../ajax_requests/archiveOne.js";
+import { archiveOneNote } from "../../ajax_requests/archiveOne.js";
 
 const archiveThisNote = async (note, isArchived, dataId) => {
   let bool = !JSON.parse(isArchived);

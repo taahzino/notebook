@@ -1,6 +1,8 @@
 const readNote = (dataId, wheretolookup, popup, title, content) => {
+  console.log(dataId, wheretolookup, popup, title, content);
   for (let i = 0; i < wheretolookup.length; i++) {
     if (wheretolookup[i]._id === dataId || wheretolookup[i].tempId) {
+      console.log(wheretolookup[i]);
       popup.setAttribute("data-id", dataId);
       popup.setAttribute(
         "data-note-ispinned",

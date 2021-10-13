@@ -1,4 +1,4 @@
-import { pinOneNote } from "../ajax_requests/pinOne.js";
+import { pinOneNote } from "../../ajax_requests/pinOne.js";
 
 const pinThisNote = async (note, dataId, isPinned, allNotes, pinnedDiv, unpinnedDiv, contentSection) => {
   // decide where to lookup

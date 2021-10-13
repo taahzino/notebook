@@ -1,4 +1,4 @@
-import { bookmarkOneNote } from "../ajax_requests/bookmarkOne.js";
+import { bookmarkOneNote } from "../../ajax_requests/bookmarkOne.js";
 
 const bookmarkThisNote = async (note, isBookmarked, dataId) => {
   let bool = !JSON.parse(isBookmarked);

@@ -1,5 +1,5 @@
 // Modules
-import { fetchAllNotes } from "./notes/ajax_requests/fetchNotes.js";
+import { fetchAllNotes } from "./ajax_requests/fetchNotes.js";
 import { archiveThisNote } from "./notes/modules/archiveNote.js";
 import { bookmarkThisNote } from "./notes/modules/bookmarkNote.js";
 import { createNewNote } from "./notes/modules/createNote.js";

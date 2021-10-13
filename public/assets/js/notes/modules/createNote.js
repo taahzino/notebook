@@ -1,5 +1,5 @@
+import { createOneNote } from "../../ajax_requests/createOne.js";
 import { bindNote } from "../../popup.js";
-import { createOneNote } from "../ajax_requests/createOne.js";
 import { adjustNewNote } from "./adjustNewNote.js";
 
 const createNewNote = async (

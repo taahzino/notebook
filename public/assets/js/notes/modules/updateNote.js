@@ -1,4 +1,4 @@
-import { updateOneNote } from "../ajax_requests/updateOne.js";
+import { updateOneNote } from "../../ajax_requests/updateOne.js";
 
 const updateNote = async (
   dataId,

@@ -1,4 +1,4 @@
-import { deleteOneNote } from "../ajax_requests/deleteOne.js";
+import { deleteOneNote } from "../../ajax_requests/deleteOne.js";
 
 const deleteThisNote = async (note, allNotes) => {
   const dataId = note.getAttribute("data-id");
