@@ -271,6 +271,10 @@ body {
     z-index: 1000;
     opacity: 1;
     pointer-events: all;
+    textarea,
+    input {
+      z-index: 1000000;
+    }
     .note__options {
       opacity: 1;
       pointer-events: all;

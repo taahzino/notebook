@@ -331,6 +331,11 @@ body.inactive .container {
   pointer-events: all;
 }
 
+.popup.active textarea,
+.popup.active input {
+  z-index: 1000000;
+}
+
 .popup.active .note__options {
   opacity: 1;
   pointer-events: all;
