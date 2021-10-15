@@ -334,7 +334,7 @@ body.inactive .container {
 .popup.active textarea,
 .popup.active input {
   opacity: 1;
-  z-index: 1000000;
+  z-index: 1000000000000;
 }
 
 .popup.active .note__options {
