@@ -28,6 +28,11 @@ const readNote = (dataId, isPinned) => {
       popup.setAttribute("data-note-ispinned", notesArray[i].pinned);
       titleField.value =
         notesArray[i].title !== "false" ? notesArray[i].title : "";
+      if (notesArray[i].content !== "false" && notesArray[i].content.length > 700) {
+        contentField.style.height = '450px';
+      } else {
+        contentField.style.height = '250px';
+      }
       contentField.value =
         notesArray[i].content !== "false" ? notesArray[i].content : "";
       localStorage.setItem(
