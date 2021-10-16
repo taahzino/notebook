@@ -23,7 +23,7 @@ const readNote = (dataId, isPinned) => {
   }
 
   for (let i = 0; i < notesArray.length; i++) {
-    if (notesArray[i]._id === dataId || notesArray[i].tempId) {
+    if (notesArray[i]._id === dataId || notesArray[i].tempId === dataId) {
       popup.setAttribute("data-id", dataId);
       popup.setAttribute("data-note-ispinned", notesArray[i].pinned);
       titleField.value =
