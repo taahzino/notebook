@@ -27,38 +27,43 @@ const createNewNote = async (newTitle, newContent) => {
     newNoteHTML.setAttribute("data-note-isPinned", "false");
     newNoteHTML.setAttribute("data-note-isBookmarked", "false");
     newNoteHTML.setAttribute("data-note-isArchived", "false");
-    newNoteHTML.innerHTML = `
-            <h3 class="note__title">${
-              newTitle !== "false"
-                ? newTitle.length > titleLength
-                  ? newTitle.substr(0, titleLength) + "..."
-                  : newTitle
-                : ""
-            }</h3>
-            <div name="note__summery" class="note__summery">
-            ${
-              newContent !== "false"
-                ? newContent.length > contentLength
-                  ? newContent.substr(0, contentLength) + "..."
-                  : newContent
-                : ""
-            }
-            </div>
-            <div class="note__options">
-                <button class="note__option_pin" title="Pin this note">
-                    <i class="bx bx-pin"></i>
-                </button>
-                <button class="note__option_heart" title="Add bookmark">
-                    <i class='bx bx-heart'></i>
-                </button>
-                <button class="note__option_archive" title="Move to archive">
-                    <i class='bx bx-archive-in'></i>
-                </button>
-                <button class="note__option_delete" title="Delete">
-                    <i class="bx bx-trash"></i>
-                </button>
-            </div>
-        `;
+    const NOTE_TITLE_HTML = document.createElement("h3");
+    NOTE_TITLE_HTML.classList.add("note__title");
+    NOTE_TITLE_HTML.innerHTML =
+      newTitle !== "false"
+        ? newTitle.length > titleLength
+          ? newTitle.substr(0, titleLength) + "..."
+          : newTitle
+        : "";
+    const NOTE_SUMMERY_HTML = document.createElement("div");
+    NOTE_SUMMERY_HTML.classList.add("note__summery");
+    NOTE_SUMMERY_HTML.setAttribute("name", "note__summery");
+    NOTE_SUMMERY_HTML.innerHTML =
+      newContent !== "false"
+        ? newContent.length > contentLength
+          ? newContent.substr(0, contentLength) + "..."
+          : newContent
+        : "";
+    const NOTE_OPTIONS_HTML = document.createElement("div");
+    NOTE_OPTIONS_HTML.classList.add("note__options");
+    NOTE_OPTIONS_HTML.innerHTML = `
+      <button class="note__option_pin" title="Pin this note">
+          <i class="bx bx-pin"></i>
+      </button>
+      <button class="note__option_heart" title="Add bookmark">
+          <i class='bx bx-heart'></i>
+      </button>
+      <button class="note__option_archive" title="Move to archive">
+          <i class='bx bx-archive-in'></i>
+      </button>
+      <button class="note__option_delete" title="Delete">
+          <i class="bx bx-trash"></i>
+      </button>
+    `;
+
+    newNoteHTML.append(NOTE_TITLE_HTML);
+    newNoteHTML.append(NOTE_SUMMERY_HTML);
+    newNoteHTML.append(NOTE_OPTIONS_HTML);
 
     const TEMP_NOTE_OBJ = {
       _id: tempId,
@@ -66,12 +71,13 @@ const createNewNote = async (newTitle, newContent) => {
       pinned: false,
       content: newContent,
     };
+
     ALL_NOTES.unpinned.push(TEMP_NOTE_OBJ);
     UNPINNED_NOTES.push(TEMP_NOTE_OBJ);
-    
+
     localStorage.setItem("ALL_NOTES", JSON.stringify(ALL_NOTES));
     localStorage.setItem("UNPINNED_NOTES", JSON.stringify(UNPINNED_NOTES));
-    
+
     unpinnedDiv.insertBefore(newNoteHTML, unpinnedDiv.childNodes[0]);
     bindNote(newNoteHTML);
   }

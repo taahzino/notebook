@@ -38,7 +38,7 @@ const updateNote = async (dataId, isPinned, newTitle, newContent) => {
         0,
         titleLength
       );
-      allNotesDOM[i].querySelector(".note__summery").innerText =
+      allNotesDOM[i].querySelector(".note__summery").innerHTML =
         newContent.length > contentLength
           ? newContent.substr(0, contentLength) + "..."
           : newContent;
