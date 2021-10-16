@@ -1,7 +1,6 @@
 import { fetchArchives } from "../ajax_requests/fetchArchives.js";
-import { activatePopup } from "../modules/activatePopup.js";
-import { bindNote } from "../modules/bindNotes.js";
 import { closePopup } from "../modules/closePopup.js";
+import { common } from "../modules/common.js";
 import { deactivatePopup } from "../modules/deactivatePopup.js";
 import { localStorageAlert } from "../modules/localStorageAlert.js";
 
@@ -11,7 +10,6 @@ const createNoteLinkIcon = createNoteLink.querySelector("i");
 const createNoteLinkSpan = createNoteLink.querySelector("span");
 const popup = document.querySelector(".popup");
 const closePopupBtn = document.querySelector(".note__option_close");
-const deletePopupBtn = popup.querySelector(".note__option_delete");
 
 // IIFE (Immediately invoked function expression)
 (async () => {
@@ -40,22 +38,4 @@ const deletePopupBtn = popup.querySelector(".note__option_delete");
 })();
 
 // On window load
-window.onload = () => {
-  // Create new note
-  createNoteLink.addEventListener("click", (e) => {
-    e.preventDefault();
-    activatePopup(body, popup);
-    popup.setAttribute("data-id", "");
-  });
-
-  deletePopupBtn.addEventListener("click", (e) => {
-    e.preventDefault();
-    popup.querySelector("#content").textContent = "";
-    popup.querySelector("input").value = "";
-    deactivatePopup();
-  });
-
-  document.querySelectorAll(".notes__grid .note").forEach((note) => {
-    bindNote(note);
-  });
-};
+window.onload = common;
