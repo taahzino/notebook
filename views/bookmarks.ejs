@@ -37,7 +37,7 @@
                         <div name="note__summery" class="note__summery">
                           <script type="module">
                             const mynote = document.querySelector('.note[data-id="<%= note._id %>"]');
-                            mynote.querySelector('.note__summery').innerHTML = "<%- note.content.length> 0 && note.content !== 'false' && note.content !== false ? note.content.length> 180 ? note.content.substr(0, 180) + '...' : note.content : '' %>"
+                            mynote.querySelector('.note__summery').innerHTML = `<%- note.content.length> 0 && note.content !== 'false' && note.content !== false ? note.content.length> 180 ? note.content.substr(0, 180) + '...' : note.content : '' %>`;
                           </script>
                         </div>
     
