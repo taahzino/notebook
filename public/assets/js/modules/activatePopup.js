@@ -4,7 +4,7 @@ import { controlTextarea } from './dom/controlArea.js';
 const body = document.querySelector("body");
 const popup = document.querySelector(".popup");
 const inputField = popup.querySelector("input");
-const contentField = popup.querySelector("textarea");
+const contentField = popup.querySelector("#content");
 
 const activatePopup = () => {
   body.classList.add("inactive");

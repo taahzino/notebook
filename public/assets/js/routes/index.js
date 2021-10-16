@@ -50,8 +50,9 @@ window.onload = () => {
     popup.setAttribute("data-id", "");
   });
 
-  deletePopupBtn.addEventListener("click", () => {
-    popup.querySelector("textarea").value = "";
+  deletePopupBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    popup.querySelector("#content").textContent = "";
     popup.querySelector("input").value = "";
     deactivatePopup();
   });

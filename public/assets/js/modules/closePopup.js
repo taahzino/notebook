@@ -1,7 +1,10 @@
 // Close popup functionalities
 const closePopup = (closePopupBtn, body, popup, create, deactivate) => {
   // deactivate popup on click event of close button
-  closePopupBtn.addEventListener("click", deactivate);
+  closePopupBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    deactivate();
+  });
 
   // If user clicks outside the popup
   body.onclick = (e) => {

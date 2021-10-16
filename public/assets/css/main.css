@@ -305,7 +305,7 @@ body.inactive .container {
   max-width: 650px;
   padding: 10px;
   border-radius: 10px;
-  border: 2px solid dodgerblue;
+  border: 2px solid darkgray;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -321,15 +321,14 @@ body.inactive .container {
 }
 
 .popup .note__options {
-  opacity: 0;
-  pointer-events: none;
   width: 100%;
   position: relative;
   bottom: 0;
+  opacity: 0;
+  pointer-events: none;
 }
 
-.popup input,
-.popup textarea {
+.popup input {
   border: none;
   outline: none;
   font-size: 18px;
@@ -339,16 +338,51 @@ body.inactive .container {
   font-weight: 500;
 }
 
-.popup textarea {
+.popup input::-webkit-input-placeholder {
+  font-weight: 400;
+}
+
+.popup input:-ms-input-placeholder {
+  font-weight: 400;
+}
+
+.popup input::-ms-input-placeholder {
+  font-weight: 400;
+}
+
+.popup input::placeholder {
+  font-weight: 400;
+}
+
+.popup #content {
+  -webkit-appearance: textarea;
+     -moz-appearance: textarea;
+          appearance: textarea;
+  border: 1px solid gray;
+  font: medium -moz-fixed;
+  font: -webkit-small-control;
+  overflow: auto;
+  width: 100%;
+  border: none;
+  outline: none;
+  padding: 10px;
+  margin-bottom: 3px;
+  font-family: "Poppins", serif;
+  font-weight: 500;
   font-size: 16px;
   resize: none;
   font-weight: 400;
   height: 250px;
-  max-height: 450px;
+  max-height: 500px;
+}
+
+.popup #content:empty:before {
+  content: attr(data-text);
+  color: grey;
 }
 
 .popup.active {
-  z-index: 10000000;
+  z-index: 1000000000000;
   opacity: 1;
   pointer-events: all;
 }
@@ -356,12 +390,14 @@ body.inactive .container {
 .popup.active textarea,
 .popup.active input {
   opacity: 1;
+  pointer-events: all;
   z-index: 1000000000000;
 }
 
 .popup.active .note__options {
   opacity: 1;
   pointer-events: all;
+  z-index: 1000000000000;
 }
 
 @media screen and (max-width: 1070px) {

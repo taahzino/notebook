@@ -4,7 +4,7 @@ const readNote = (dataId, isPinned) => {
   // DOM Variables and Constants
   const popup = document.querySelector(".popup");
   const titleField = popup.querySelector("input#title");
-  const contentField = popup.querySelector("textarea#content");
+  const contentField = popup.querySelector("#content");
 
   const PINNED_NOTES = JSON.parse(localStorage.getItem("PINNED_NOTES"));
   const UNPINNED_NOTES = JSON.parse(localStorage.getItem("UNPINNED_NOTES"));
@@ -33,7 +33,7 @@ const readNote = (dataId, isPinned) => {
       } else {
         contentField.style.height = '250px';
       }
-      contentField.value =
+      contentField.innerHTML =
         notesArray[i].content !== "false" ? notesArray[i].content : "";
       localStorage.setItem(
         "tempTitle",

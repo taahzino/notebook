@@ -5,7 +5,7 @@ import { updateNote } from "./dom/updateNote.js";
 const body = document.querySelector("body");
 const popup = document.querySelector(".popup");
 const titleField = popup.querySelector("input#title");
-const contentField = popup.querySelector("textarea#content");
+const contentField = popup.querySelector("#content");
 
 const deactivatePopup = async () => {
   const dataId = popup.getAttribute("data-id");
@@ -18,10 +18,10 @@ const deactivatePopup = async () => {
   popup.classList.remove("active");
 
   let newTitle = titleField.value;
-  let newContent = contentField.value;
+  let newContent = contentField.innerHTML;
 
   titleField.value = "";
-  contentField.value = "";
+  contentField.textContent = "";
 
   if (window.global.isReading && dataId.length === 24) {
     if (newTitle.trim() === "" && newContent.trim() === "") {
@@ -34,6 +34,9 @@ const deactivatePopup = async () => {
     }
   } else {
     if (newTitle.length > 0 || newContent.length > 0) {
+      console.log(newContent);
+      newContent = newContent.split(/\n\r?/g).join('<br>');
+      console.log(newContent);
       createNewNote(newTitle, newContent);
     }
   }
