@@ -14,6 +14,9 @@ const activatePopup = () => {
   contentField.addEventListener('input', () => {
     controlTextarea(contentField);
   });
+  contentField.addEventListener('paste', () => {
+    controlTextarea(contentField);
+  });
 };
 
 export { activatePopup };

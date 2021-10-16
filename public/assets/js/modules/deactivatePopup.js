@@ -21,10 +21,10 @@ const deactivatePopup = async () => {
   let newContent = contentField.innerHTML;
 
   titleField.value = "";
-  contentField.textContent = "";
+  contentField.innerHTML = "";
 
   if (window.global.isReading && dataId.length === 24) {
-    if (newTitle.trim() === "" && newContent.trim() === "") {
+    if ((newTitle.trim() === "") && (newContent.trim() === "") || newContent.replace(/<[^>]*>/g, '').length === 0) {
       deleteThisNote(window.global.selectedNote, dataId, isPinned);
     } else if (
       newTitle !== localStorage.getItem("tempTitle") ||
@@ -34,7 +34,7 @@ const deactivatePopup = async () => {
     }
   } else {
     if (newTitle.length > 0 || newContent.length > 0) {
-      newContent = newContent.split(/\n\r?/g).join('<br>');
+      newContent = newContent.split(/\n\r?/g).join("<br>");
       createNewNote(newTitle, newContent);
     }
   }
