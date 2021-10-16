@@ -1,5 +1,14 @@
 // Close popup functionalities
 const closePopup = (closePopupBtn, body, popup, create, deactivate) => {
+  // detect keypress enter event on input field
+  const input = popup.querySelector('input');
+  input.addEventListener('keydown', (e) => {
+    if (e.key.toLowerCase().trim() === 'enter') {
+      e.preventDefault();
+      deactivate();
+    }
+  });
+
   // deactivate popup on click event of close button
   closePopupBtn.addEventListener("click", (e) => {
     e.preventDefault();
