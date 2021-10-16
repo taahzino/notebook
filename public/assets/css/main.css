@@ -372,7 +372,7 @@ body.inactive .container {
   font-size: 16px;
   resize: none;
   font-weight: 400;
-  height: 250px;
+  height: 120px;
   max-height: 500px;
 }
 

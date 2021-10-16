@@ -10,7 +10,7 @@ const activatePopup = () => {
   body.classList.add("inactive");
   popup.classList.add("active");
   inputField.focus();
-  contentField.style.height = "250px";
+  contentField.style.height = "120px";
   contentField.addEventListener('input', () => {
     controlTextarea(contentField);
   });

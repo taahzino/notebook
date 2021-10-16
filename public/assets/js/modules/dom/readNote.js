@@ -8,14 +8,17 @@ const readNote = (dataId, isPinned) => {
 
   const PINNED_NOTES = JSON.parse(localStorage.getItem("PINNED_NOTES"));
   const UNPINNED_NOTES = JSON.parse(localStorage.getItem("UNPINNED_NOTES"));
-  
+
   let notesArray;
-  if (pathname === '/') {
+  
+  if (pathname === "/") {
     notesArray = JSON.parse(isPinned) ? PINNED_NOTES : UNPINNED_NOTES;
-  } else if (pathname === '/bookmarks') {
-    const BOOKMARKED_NOTES = JSON.parse(localStorage.getItem("BOOKMARKED_NOTES"));
+  } else if (pathname === "/bookmarks") {
+    const BOOKMARKED_NOTES = JSON.parse(
+      localStorage.getItem("BOOKMARKED_NOTES")
+    );
     notesArray = BOOKMARKED_NOTES;
-  } else if (pathname === '/archives') {
+  } else if (pathname === "/archives") {
     const ARCHIVED_NOTES = JSON.parse(localStorage.getItem("ARCHIVED_NOTES"));
     notesArray = ARCHIVED_NOTES;
   } else {
@@ -28,13 +31,19 @@ const readNote = (dataId, isPinned) => {
       popup.setAttribute("data-note-ispinned", notesArray[i].pinned);
       titleField.value =
         notesArray[i].title !== "false" ? notesArray[i].title : "";
-      if (notesArray[i].content !== "false" && notesArray[i].content.length > 700) {
-        contentField.style.height = '450px';
-      } else {
-        contentField.style.height = '250px';
-      }
       contentField.innerHTML =
         notesArray[i].content !== "false" ? notesArray[i].content : "";
+      if (notesArray[i].content !== "false") {
+        if (contentField.scrollHeight > 300) {
+          contentField.style.height = "450px";
+        } else if (contentField.scrollHeight > 120) {
+          contentField.style.height = "250px";
+        } else {
+          contentField.style.height = "120px";
+        }
+      } else {
+        contentField.style.height = "120px";
+      }
       localStorage.setItem(
         "tempTitle",
         notesArray[i].title !== "false" ? notesArray[i].title : ""
