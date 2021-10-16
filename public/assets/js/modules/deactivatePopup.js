@@ -34,9 +34,7 @@ const deactivatePopup = async () => {
     }
   } else {
     if (newTitle.length > 0 || newContent.length > 0) {
-      console.log(newContent);
       newContent = newContent.split(/\n\r?/g).join('<br>');
-      console.log(newContent);
       createNewNote(newTitle, newContent);
     }
   }
