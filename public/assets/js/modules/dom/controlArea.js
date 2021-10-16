@@ -5,6 +5,9 @@ const controlTextarea = (content) => {
   if (scrollHeight < 450) {
     content.style.height = `${scrollHeight}px`;
   }
+  if (content.innerHTML.length < 700) {
+    content.style.height = "250px";
+  }
 };
 
 export { controlTextarea };
