@@ -66,8 +66,6 @@ app.listen(env.PORT, () => {
     }
 });
 
-(() => {
-    // eslint-disable-next-line global-require
-    // [0] require('./updates/10oct2021')();
-    // ** successfully executed [0]
-})();
+app.use((req, res) => {
+    res.render('error_404');
+});
