@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Profile - Notebook</title>
+  <link rel="shortcut icon" href="/assets/images/logo.png">
+  <meta property="og:image" content="/assets/images/thumbnail.png" />
+  <meta name="keywords" content="Notebook, tahsin, ahmed, tushar, tahsin ahmed tushar">
+  <meta name="description" content="Capture your thoughts">
+
+  <link rel="stylesheet" href="/assets/css/main.css" />
+  <link rel="stylesheet" href="/assets/css/userProfile.css" />
+  <link href="https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css" rel="stylesheet" />
+</head>
+
+<body class="">
+  <div class="container">
+    <%- include('./partials/sidebar.ejs'); %>
+      <div class="content">
+        <%- include('./partials/searchBox.ejs'); %>
+
+        <section class="user__profile">
+            <div class="profile__details card">
+                <div class="left side">
+                    <img src="/assets/images/user_avatar.jpg" alt="">
+                </div>
+                <div class="right side">
+                    <div class="wrapper">
+                        <h2>Tahsin Ahmed</h2>
+                        <p class="status">Free</p>
+                    </div>
+                </div>
+            </div>
+            <div class="account__details card">
+                <div class="input__field">
+                    <label for="firstname">Firstname</label>
+                    <div class="display">
+                        <input type="text" name="firstname" id="firstname" value="Tahsin" disabled>
+                        <button class="edit" id="edit_firstname">Edit</button>
+                    </div>
+                </div>
+                <div class="input__field">
+                    <label for="lastname">Lastname</label>
+                    <div class="display">
+                        <input type="text" name="lastname" id="lastname" value="Ahmed" disabled>
+                        <button class="edit" id="edit_lastname">Edit</button>
+                    </div>
+                </div>
+                <div class="input__field">
+                    <label for="email">Email</label>
+                    <div class="display">
+                        <input type="text" name="email" id="email" value="me@tahsintushar.com" disabled>
+                        <button class="edit" id="edit_email">Edit</button>
+                    </div>
+                </div>
+                <div class="input__field">
+                    <label for="password">Password</label>
+                    <div class="display">
+                        <input type="text" name="password" id="password" value="******" disabled>
+                        <button>Change</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="actions card">
+                <label>Actions</label>
+                <div class="input__field">
+                    <input type="button" value="Delete Account" class="deleteAC">
+                    <input type="button" value="Reset Account" class="resetAC">
+                </div>
+            </div>
+        </section>
+
+      </div>
+  </div>
+
+  <%- include('./partials/newNotePopup.ejs'); %>
+  
+  <script type="module" src="/assets/js/routes/user.js"></script>
+</body>
+
+</html>

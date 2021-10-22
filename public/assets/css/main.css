@@ -101,6 +101,10 @@ body.inactive .container {
   border-radius: 5px;
   -webkit-transition: 0.3s ease;
   transition: 0.3s ease;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
 }
 
 .sidebar .item__link i {
