@@ -34,6 +34,19 @@ const addUser = async (req, res) => {
     }
 };
 
+const getUser = async (req, res, next) => {
+    if (res.locals.HTML) {
+        next();
+    } else {
+        const { user } = res.locals;
+        res.status(200).json({
+            message: 'success',
+            result: user,
+        });
+    }
+};
+
 module.exports = {
     addUser,
+    getUser,
 };
