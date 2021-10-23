@@ -44,6 +44,7 @@ const pinThisNote = async (note) => {
       pinnedTitle.innerText = "Pinned";
       contentSection.insertBefore(pinnedTitle, unpinnedDiv);
 
+      const pinnedDiv = document.createElement('div');
       pinnedDiv.setAttribute("class", "notes__grid pinned__notes");
       pinnedDiv.appendChild(note);
       contentSection.insertBefore(pinnedDiv, unpinnedDiv);
