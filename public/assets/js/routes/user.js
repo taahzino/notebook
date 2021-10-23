@@ -43,6 +43,7 @@ const disableEditing = (eb, input) => {
   input.setAttribute("disabled", "");
   input.classList.remove("editing");
   eb.innerText = "Edit";
+  alert('This feature is still under development. So, updating data will not change anything from the server. Thanks for your patience. For any query/suggestion: tahsintushar.dev@gmail.com');
 };
 
 const enableEditing = (eb, input) => {
