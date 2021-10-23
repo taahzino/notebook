@@ -31,7 +31,11 @@ const closePopupBtn = document.querySelector(".note__option_close");
 })();
 
 // On window load
-window.onload = common;
+window.onload = () => {
+  common();
+  const img = document.querySelector('#user__profile__picture');
+  img.setAttribute('src', '/user/profile/image');
+};
 
 const commonEditBtns = document.querySelectorAll(".edit");
 

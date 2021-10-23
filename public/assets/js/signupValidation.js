@@ -121,7 +121,7 @@ function isEmail(email) {
 }
 
 const sendRequest = async (userobject) => {
-    const res = await fetch(`${window.location.origin}/api/signup/`, {
+    const res = await fetch(`${window.location.origin}/api/user/`, {
         method: 'POST',
         cache: 'no-cache',
         headers: {

@@ -26,12 +26,24 @@
         <section class="user__profile">
             <div class="profile__details card">
                 <div class="left side">
-                    <img src="/assets/images/user_avatar.jpg" alt="">
+                    <img src="" alt="<%= user && user.firstname ? user.firstname + ' ' : ''%>" id="user__profile__picture">
                 </div>
                 <div class="right side">
                     <div class="wrapper">
-                        <h2>Tahsin Ahmed</h2>
-                        <p class="status">Free</p>
+                        <h2>
+                            <%= user && user.firstname ? user.firstname + ' ' : ''%>
+                            <%= user && user.lastname ? user.lastname : ''%>
+                        </h2>
+                        <p class="status">
+                            <% 
+                            let status = 'Free';
+                            if (user && user.userType) {
+                                    status = user.userType.charAt(0).toUpperCase() + user.userType.slice(1);
+                                    status = status.split(/(?=[A-Z])/).join(' ');
+                                }
+                            %>
+                            <%= status %>
+                        </p>
                     </div>
                 </div>
             </div>
@@ -39,21 +51,21 @@
                 <div class="input__field">
                     <label for="firstname">Firstname</label>
                     <div class="display">
-                        <input type="text" name="firstname" id="firstname" value="Tahsin" disabled>
+                        <input type="text" name="firstname" id="firstname" value="<%= user && user.firstname ? user.firstname : ''%>" disabled>
                         <button class="edit" id="edit_firstname">Edit</button>
                     </div>
                 </div>
                 <div class="input__field">
                     <label for="lastname">Lastname</label>
                     <div class="display">
-                        <input type="text" name="lastname" id="lastname" value="Ahmed" disabled>
+                        <input type="text" name="lastname" id="lastname" value="<%= user && user.lastname ? user.lastname : ''%>" disabled>
                         <button class="edit" id="edit_lastname">Edit</button>
                     </div>
                 </div>
                 <div class="input__field">
                     <label for="email">Email</label>
                     <div class="display">
-                        <input type="text" name="email" id="email" value="me@tahsintushar.com" disabled>
+                        <input type="text" name="email" id="email" value="<%= user && user.email ? user.email : ''%>" disabled>
                         <button class="edit" id="edit_email">Edit</button>
                     </div>
                 </div>
