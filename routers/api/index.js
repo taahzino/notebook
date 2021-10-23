@@ -6,7 +6,7 @@ const api = express.Router();
 
 // Handle requests
 api.use('/login', require('./login'));
-api.use('/signup', require('./signup'));
+api.use('/user', require('./user'));
 api.use('/notes', require('./notes'));
 
 // 404 handler

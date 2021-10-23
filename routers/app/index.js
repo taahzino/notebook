@@ -1,7 +1,9 @@
 // Dependencies
+const path = require('path');
 const express = require('express');
 
 // Modules
+const isUrl = require('../../utils/isUrl');
 const decorateHTML = require('../../middlewares/common/decorateHTML');
 const checkLogin = require('../../middlewares/auth/checkLogin');
 const isLoggedIn = require('../../middlewares/auth/isLoggedIn');
@@ -13,6 +15,7 @@ const {
     getBookmarkedNotes,
     getArchivedNotes,
 } = require('../../controllers/notesControllers');
+const { getUser } = require('../../controllers/userControllers');
 
 // Create express router
 const appRouter = express.Router();
@@ -33,9 +36,20 @@ appRouter.get('/archives', decorateHTML, checkLogin, getArchivedNotes, (req, res
     res.render('archives');
 });
 
-appRouter.get('/user', decorateHTML, checkLogin, getArchivedNotes, (req, res) => {
+appRouter.get('/user', decorateHTML, checkLogin, getUser, (req, res) => {
     res.locals.activeItem = 'user';
     res.render('user');
+});
+
+appRouter.get('/user/profile/image', decorateHTML, checkLogin, (req, res) => {
+    const { photo } = res.locals.user;
+    if (photo.trim().length === 0) {
+        res.sendFile(path.join(__dirname, '../../public/assets/images/user_avatar.jpg'));
+    } else if (isUrl(photo)) {
+        res.redirect(photo);
+    } else {
+        res.sendFile(path.join(__dirname, `../../uploads/${photo}`));
+    }
 });
 
 appRouter.get('/login', decorateHTML, isLoggedIn, (req, res) => {
