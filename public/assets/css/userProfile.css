@@ -111,6 +111,7 @@ body {
 
 .profile__details .left {
   width: 20%;
+  margin-right: 10px;
 }
 
 .profile__details .right {
