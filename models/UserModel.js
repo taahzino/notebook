@@ -20,6 +20,9 @@ const UserSchema = new mongoose.Schema(
             type: String,
             required: true,
         },
+        lastpasschanged: {
+            type: Date,
+        },
         photo: {
             type: String,
             default: '',
