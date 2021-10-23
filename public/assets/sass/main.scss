@@ -13,6 +13,10 @@ a {
   text-decoration: none;
 }
 
+img {
+  -webkit-user-drag: none;
+}
+
 i,
 button {
   -webkit-tap-highlight-color: #fff;
