@@ -1,4 +1,6 @@
 // Dependencies
+const moment = require('moment');
+const lodash = require('lodash');
 const jwt = require('jsonwebtoken');
 const GoogleUser = require('../../models/GoogleUserModel');
 const GeneralUser = require('../../models/UserModel');
@@ -13,8 +15,10 @@ const checkLogin = async (req, res, next) => {
         if (token) {
             try {
                 const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY);
-                const user = await GeneralUser.findById(decoded.userId);
+                const doc = await GeneralUser.findById(decoded.userId);
+                const user = lodash.cloneDeep(doc.toObject());
                 user.password = undefined;
+                user.lastpasschanged = moment(user.lastpasschanged, 'YYYYMMDD').fromNow();
                 res.locals.user = user;
                 next();
             } catch (err) {

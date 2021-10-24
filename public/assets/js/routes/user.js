@@ -8,6 +8,8 @@ const createNoteLink = document.querySelector(".createNoteLink");
 const createNoteLinkIcon = createNoteLink.querySelector("i");
 const createNoteLinkSpan = createNoteLink.querySelector("span");
 const popup = document.querySelector(".popup");
+const changePassBtn = document.querySelector('#changePassBtn');
+const passwordFields = document.querySelector('#passwordFields');
 const closePopupBtn = document.querySelector(".note__option_close");
 
 // IIFE (Immediately invoked function expression)
@@ -35,6 +37,17 @@ window.onload = () => {
   common();
   const img = document.querySelector('#user__profile__picture');
   img.setAttribute('src', '/user/profile/image');
+
+  if (changePassBtn) {
+    changePassBtn.addEventListener('click', () => {
+      passwordFields.classList.toggle('show');
+      if (passwordFields.classList.contains('show')) {
+        changePassBtn.innerText = 'Cancel';
+      } else {
+        changePassBtn.innerText = 'Change';
+      }
+    });
+  }
 };
 
 const commonEditBtns = document.querySelectorAll(".edit");

@@ -34,7 +34,7 @@ const closePopup = (closePopupBtn, body, popup, create, deactivate) => {
 
   // If user presses escape button
   body.addEventListener("keydown", (e) => {
-    if (e.key.toLowerCase().trim() === "escape") {
+    if (e && e.key && e.key.toLowerCase().trim() === "escape") {
       deactivate();
     }
   });

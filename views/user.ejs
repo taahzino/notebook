@@ -69,13 +69,30 @@
                         <button class="edit" id="edit_email">Edit</button>
                     </div>
                 </div>
-                <div class="input__field">
-                    <label for="password">Password</label>
-                    <div class="display">
-                        <input type="text" name="password" id="password" value="******" disabled>
-                        <button>Change</button>
+                <% if (user && user.userType !== 'googleUser') { %>
+                    <div class="input__field">
+                        <label for="password">Password</label>
+                        <div class="display">
+                            <input type="text" name="password" id="password" value="Last changed <%= user.lastpasschanged ? user.lastpasschanged : user.createdAt%>" disabled>
+                            <button id="changePassBtn">Change</button>
+                        </div>
                     </div>
-                </div>
+                    <div id="passwordFields">
+                        <div class="input__field">
+                            <label for="current_password">Current Password</label>
+                            <div class="display">
+                                <input type="password" name="current_password" id="current_password" autocomplete="false">
+                            </div>
+                        </div>
+                        <div class="input__field">
+                            <label for="new_password">New Password</label>
+                            <div class="display">
+                                <input type="password" name="new_password" id="new_password" autocomplete="false">
+                            </div>
+                        </div>
+                        <button id="changePassword">Change</button>
+                    </div>
+                <% } %>
             </div>
 
             <div class="actions card">
