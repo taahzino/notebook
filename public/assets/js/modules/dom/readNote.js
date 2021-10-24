@@ -2,9 +2,9 @@ const readNote = (dataId, isPinned) => {
   // Get window variables
   const { pathname } = window.location;
   // DOM Variables and Constants
-  const popup = document.querySelector(".popup");
-  const titleField = popup.querySelector("input#title");
-  const contentField = popup.querySelector("#content");
+  const note__popup = document.querySelector(".note__popup");
+  const titleField = note__popup.querySelector("input#title");
+  const contentField = note__popup.querySelector("#content");
 
   const PINNED_NOTES = JSON.parse(localStorage.getItem("PINNED_NOTES"));
   const UNPINNED_NOTES = JSON.parse(localStorage.getItem("UNPINNED_NOTES"));
@@ -27,8 +27,8 @@ const readNote = (dataId, isPinned) => {
 
   for (let i = 0; i < notesArray.length; i++) {
     if (notesArray[i]._id === dataId || notesArray[i].tempId === dataId) {
-      popup.setAttribute("data-id", dataId);
-      popup.setAttribute("data-note-ispinned", notesArray[i].pinned);
+      note__popup.setAttribute("data-id", dataId);
+      note__popup.setAttribute("data-note-ispinned", notesArray[i].pinned);
       titleField.value =
         notesArray[i].title !== "false" ? notesArray[i].title : "";
       contentField.innerHTML =

@@ -22,7 +22,7 @@ const closePopup = (closePopupBtn, body, popup, create, deactivate) => {
       e.target !== create.createNoteLink &&
       e.target !== create.createNoteLinkIcon &&
       e.target !== create.createNoteLinkSpan &&
-      e.target.closest(".popup") !== popup &&
+      e.target.closest(".note__popup") !== popup &&
       !e.target.classList.contains("note") &&
       !e.target.closest(".note") &&
       window.getSelection().toString().length === 0

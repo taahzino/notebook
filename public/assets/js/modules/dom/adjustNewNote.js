@@ -1,4 +1,4 @@
-const popup = document.querySelector(".popup");
+const note__popup = document.querySelector(".note__popup");
 
 const adjustNewNote = (tempId, newId, newNote) => {
   // DOM Variables & Constants
@@ -11,8 +11,8 @@ const adjustNewNote = (tempId, newId, newNote) => {
   const UNPINNED_NOTES = JSON.parse(localStorage.getItem("UNPINNED_NOTES"));
 
   // change popup id if the note is already opened
-  if (popup.getAttribute("data-id") === tempId) {
-    popup.setAttribute("data-id", newId);
+  if (note__popup.getAttribute("data-id") === tempId) {
+    note__popup.setAttribute("data-id", newId);
   }
 
   for (let i = 0; i < UNPINNED_NOTES.length; i++) {

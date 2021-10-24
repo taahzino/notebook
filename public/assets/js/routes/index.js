@@ -8,7 +8,7 @@ const body = document.querySelector("body");
 const createNoteLink = document.querySelector(".createNoteLink");
 const createNoteLinkIcon = createNoteLink.querySelector("i");
 const createNoteLinkSpan = createNoteLink.querySelector("span");
-const popup = document.querySelector(".popup");
+const note__popup = document.querySelector(".note__popup");
 const closePopupBtn = document.querySelector(".note__option_close");
 
 // IIFE (Immediately invoked function expression)
@@ -25,7 +25,7 @@ const closePopupBtn = document.querySelector(".note__option_close");
   closePopup(
     closePopupBtn,
     body,
-    popup,
+    note__popup,
     { createNoteLink, createNoteLinkIcon, createNoteLinkSpan },
     deactivatePopup
   );

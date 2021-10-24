@@ -3,19 +3,19 @@ import { deleteThisNote } from "./dom/deleteNote.js";
 import { updateNote } from "./dom/updateNote.js";
 
 const body = document.querySelector("body");
-const popup = document.querySelector(".popup");
-const titleField = popup.querySelector("input#title");
-const contentField = popup.querySelector("#content");
+const note__popup = document.querySelector(".note__popup");
+const titleField = note__popup.querySelector("input#title");
+const contentField = note__popup.querySelector("#content");
 
 const deactivatePopup = async () => {
-  const dataId = popup.getAttribute("data-id");
-  const isPinned = popup.getAttribute("data-note-isPinned");
+  const dataId = note__popup.getAttribute("data-id");
+  const isPinned = note__popup.getAttribute("data-note-isPinned");
 
-  popup.setAttribute("data-id", "");
-  popup.setAttribute("data-note-isPinned", "");
+  note__popup.setAttribute("data-id", "");
+  note__popup.setAttribute("data-note-isPinned", "");
 
   body.classList.remove("inactive");
-  popup.classList.remove("active");
+  note__popup.classList.remove("active");
 
   let newTitle = titleField.value;
   let newContent = contentField.innerHTML;

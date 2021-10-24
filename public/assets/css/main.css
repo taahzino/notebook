@@ -320,7 +320,7 @@ body.inactive .container {
   background-color: #eee;
 }
 
-.popup {
+.note__popup {
   position: fixed;
   top: 50%;
   left: 50%;
@@ -346,7 +346,7 @@ body.inactive .container {
   transition: all 0.3s ease;
 }
 
-.popup .note__options {
+.note__popup .note__options {
   width: 100%;
   position: relative;
   bottom: 0;
@@ -354,7 +354,7 @@ body.inactive .container {
   pointer-events: none;
 }
 
-.popup input {
+.note__popup input {
   border: none;
   outline: none;
   font-size: 18px;
@@ -364,23 +364,23 @@ body.inactive .container {
   font-weight: 500;
 }
 
-.popup input::-webkit-input-placeholder {
+.note__popup input::-webkit-input-placeholder {
   font-weight: 400;
 }
 
-.popup input:-ms-input-placeholder {
+.note__popup input:-ms-input-placeholder {
   font-weight: 400;
 }
 
-.popup input::-ms-input-placeholder {
+.note__popup input::-ms-input-placeholder {
   font-weight: 400;
 }
 
-.popup input::placeholder {
+.note__popup input::placeholder {
   font-weight: 400;
 }
 
-.popup #content {
+.note__popup #content {
   -webkit-appearance: textarea;
      -moz-appearance: textarea;
           appearance: textarea;
@@ -402,25 +402,25 @@ body.inactive .container {
   max-height: 500px;
 }
 
-.popup #content:empty:before {
+.note__popup #content:empty:before {
   content: attr(data-text);
   color: grey;
 }
 
-.popup.active {
+.note__popup.active {
   z-index: 1000000000000;
   opacity: 1;
   pointer-events: all;
 }
 
-.popup.active textarea,
-.popup.active input {
+.note__popup.active textarea,
+.note__popup.active input {
   opacity: 1;
   pointer-events: all;
   z-index: 1000000000000;
 }
 
-.popup.active .note__options {
+.note__popup.active .note__options {
   opacity: 1;
   pointer-events: all;
   z-index: 1000000000000;
@@ -431,7 +431,7 @@ body.inactive .container {
     -ms-grid-columns: (minmax(220px, 1fr))[auto-fit];
         grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   }
-  .popup {
+  .note__popup {
     width: 100%;
   }
 }
@@ -440,10 +440,10 @@ body.inactive .container {
   body.inactive .container {
     opacity: 1;
   }
-  .popup {
+  .note__popup {
     max-width: 550px;
   }
-  .popup.active {
+  .note__popup.active {
     opacity: 1;
   }
   .sidebar {
@@ -503,18 +503,18 @@ body.inactive .container {
   body.inactive .searchBox {
     display: none;
   }
-  .popup {
+  .note__popup {
     max-width: 100%;
     width: 100%;
     height: 100%;
     border-radius: 0;
     border: 0;
   }
-  .popup textarea {
+  .note__popup textarea {
     width: 100%;
     height: 80%;
   }
-  .popup .note__options {
+  .note__popup .note__options {
     position: absolute;
     bottom: 85%;
     width: 100%;
@@ -528,10 +528,10 @@ body.inactive .container {
         -ms-flex-pack: justify;
             justify-content: space-between;
   }
-  .popup .note__options .note__option_close {
+  .note__popup .note__options .note__option_close {
     margin-right: 20px;
   }
-  .popup input {
+  .note__popup input {
     margin-top: 50px;
   }
 }

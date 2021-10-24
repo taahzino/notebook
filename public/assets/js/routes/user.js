@@ -7,7 +7,7 @@ const body = document.querySelector("body");
 const createNoteLink = document.querySelector(".createNoteLink");
 const createNoteLinkIcon = createNoteLink.querySelector("i");
 const createNoteLinkSpan = createNoteLink.querySelector("span");
-const popup = document.querySelector(".popup");
+const note__popup = document.querySelector(".note__popup");
 const changePassBtn = document.querySelector('#changePassBtn');
 const passwordFields = document.querySelector('#passwordFields');
 const closePopupBtn = document.querySelector(".note__option_close");
@@ -26,7 +26,7 @@ const closePopupBtn = document.querySelector(".note__option_close");
   closePopup(
     closePopupBtn,
     body,
-    popup,
+    note__popup,
     { createNoteLink, createNoteLinkIcon, createNoteLinkSpan },
     deactivatePopup
   );
