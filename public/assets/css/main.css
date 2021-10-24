@@ -4,6 +4,7 @@
   margin: 0;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
+  font-family: "Poppins", serif;
 }
 
 a {
@@ -29,15 +30,11 @@ button {
 
 body {
   position: relative;
-  background-color: #10182f;
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
@@ -53,7 +50,6 @@ body.inactive .container {
 
 .container {
   width: 100%;
-  min-height: 100vh;
   background-color: #fff;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -138,22 +134,37 @@ body.inactive .container {
   position: relative;
   left: 100px;
   width: calc(100% - 100px);
-  height: 100vh;
   top: 0;
   background-color: whitesmoke;
   border-radius: 0 10px 10px 0;
-  padding: 10px;
   overflow: hidden;
   overflow-y: scroll;
   padding-bottom: 85px;
 }
 
+.content .searchBoxWrapper {
+  position: fixed;
+  top: 0;
+  min-height: 60px;
+  width: 100%;
+  background-color: #f5f5f5;
+  z-index: 10000000000;
+  padding-bottom: 10px;
+}
+
+.content .searchBoxWrapper.sticky {
+  -webkit-box-shadow: 1px 1px 2px lightgray;
+          box-shadow: 1px 1px 2px lightgray;
+}
+
 .content .searchBox {
   position: relative;
-  height: 40px;
+  top: 10px;
+  min-height: 40px;
   max-width: 350px;
   width: 100%;
   z-index: 10000;
+  margin: 10px;
 }
 
 .content .searchBox input {
@@ -215,12 +226,18 @@ body.inactive .container {
   background-color: #fff;
 }
 
+.content .main__section {
+  margin-top: 60px;
+}
+
 .content .page__title {
   margin-top: 10px;
+  padding: 10px;
   margin-bottom: 5px;
 }
 
 .note__section_title {
+  padding-left: 10px;
   margin: 5px;
   font-weight: 500;
   display: block;
@@ -232,6 +249,7 @@ body.inactive .container {
   -ms-grid-columns: (minmax(250px, 400px))[auto-fit];
       grid-template-columns: repeat(auto-fit, minmax(250px, 400px));
   grid-gap: 10px;
+  padding-left: 10px;
 }
 
 .notes__grid .note {

@@ -21,6 +21,7 @@
     <%- include('./partials/sidebar.ejs'); %>
       <div class="content">
         <%- include('./partials/searchBox.ejs'); %>
+        <div class="notes__section">
           <h2 class="page__title">Bookmarks</h2>
           <div class="notes__grid bookmarked__notes">
               <% if (result && result.notes && result.notes.bookmarked) {
@@ -56,6 +57,7 @@
                 <%});
               }%>
           </div>
+        </div>
       </div>
   </div>
 

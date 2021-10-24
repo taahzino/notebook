@@ -21,7 +21,8 @@
     <%- include('./partials/sidebar.ejs'); %>
       <div class="content">
         <%- include('./partials/searchBox.ejs'); %>
-          <h2 class="page__title">Home</h2>
+          <div class="main__section">
+            <h2 class="page__title">Home</h2>
           <% if (result && result.notes && typeof result.notes==='object' ) { %>
             <%if (result.notes.pinned && result.notes.pinned.length> 0) {%>
               <p class="note__section_title pinned__title">Pinned</p>
@@ -110,6 +111,7 @@
                         <%})%>
                           <%}%>
                   </div>
+          </div>
       </div>
   </div>
 

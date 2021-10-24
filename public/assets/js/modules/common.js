@@ -25,6 +25,9 @@ const common = () => {
   document.querySelectorAll(".notes__grid .note").forEach((note) => {
     bindNote(note);
   });
+
+  const searchBox = document.querySelector(".searchBoxWrapper");
+  searchBox.classList.toggle("sticky", window.scrollY > 0);
 };
 
 export { common };
