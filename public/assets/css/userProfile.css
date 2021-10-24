@@ -2,12 +2,7 @@
   font-family: "Poppins", serif;
 }
 
-body {
-  height: 100vh;
-}
-
 .user__profile {
-  height: 100%;
   width: 100%;
   display: -webkit-box;
   display: -ms-flexbox;

@@ -32,9 +32,15 @@ const closePopupBtn = document.querySelector(".note__option_close");
   );
 })();
 
+window.addEventListener("scroll", () => {
+  const searchBox = document.querySelector(".searchBoxWrapper");
+  searchBox.classList.toggle("sticky", window.scrollY > 0);
+});
+
 // On window load
 window.onload = () => {
   common();
+  
   const img = document.querySelector('#user__profile__picture');
   img.setAttribute('src', '/user/profile/image');
 

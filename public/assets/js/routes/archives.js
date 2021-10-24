@@ -37,5 +37,10 @@ const closePopupBtn = document.querySelector(".note__option_close");
   localStorage.setItem("ARCHIVED_NOTES", JSON.stringify(ARCHIVED_NOTES));
 })();
 
+window.addEventListener("scroll", () => {
+  const searchBox = document.querySelector(".searchBoxWrapper");
+  searchBox.classList.toggle("sticky", window.scrollY > 0);
+});
+
 // On window load
 window.onload = common;
