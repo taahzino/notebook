@@ -1,6 +1,6 @@
 const checkAccess = (req, res, next) => {
     const id = req.params.id.length > 0 ? req.params.id : false;
-    const { notes } = res.locals.user;
+    const notes = JSON.parse(JSON.stringify(res.locals.user.notes));
     if (id) {
         if (typeof notes === 'object' && notes instanceof Array && notes.includes(id)) {
             next();

@@ -8,7 +8,7 @@ const GeneralUser = require('../../models/UserModel');
 const checkLogin = async (req, res, next) => {
     if (req.isAuthenticated()) {
         const user = await GoogleUser.findById(req.user);
-        res.locals.user = user;
+        res.locals.user = user.toObject();
         next();
     } else {
         const token = req.signedCookies[process.env.APP_NAME] || false;
