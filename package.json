@@ -4,9 +4,7 @@
   "description": "A node application",
   "main": "app.js",
   "scripts": {
-    "start": "SET ENVIRONMENT=production && node app",
-    "dev": "SET ENVIRONMENT=development && nodemon app",
-    "push": "git push origin main && git push heroku main"
+    "start": "node app.js"
   },
   "engines": {
     "node": ">=16.8.0",
