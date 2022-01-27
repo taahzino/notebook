@@ -6,10 +6,6 @@
   "scripts": {
     "start": "node app.js"
   },
-  "engines": {
-    "node": ">=16.8.0",
-    "npm": ">=7.21.0"
-  },
   "author": "Tahsin Ahmed Tushar <tushariar@gmail.com>",
   "license": "MIT",
   "devDependencies": {
