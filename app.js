@@ -2,6 +2,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
+const dotenvExpand = require('dotenv-expand');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const passport = require('passport');
@@ -9,7 +10,10 @@ const MongoStore = require('connect-mongo');
 const cors = require('cors');
 
 // Environment variables
-dotenv.config({ path: './config/config.env' });
+const myEnv = dotenv.config({ path: './config/config.env' });
+dotenvExpand.expand(myEnv);
+
+//  Destructure env variables
 const { env } = process;
 const { MONGO_URI } = env;
 
